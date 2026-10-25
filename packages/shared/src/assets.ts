@@ -21,3 +21,9 @@ export function formatBytes(n: number): string {
   if (n < 1024 ** 3) return `${(n / 1024 ** 2).toFixed(1)} MB`;
   return `${(n / 1024 ** 3).toFixed(2)} GB`;
 }
+
+/** "/files/123/secret/name.png" -> "123" */
+export function fileIdFromUrl(url: string | null | undefined): string | null {
+  const m = url?.match(/^\/files\/(\d+)\//);
+  return m?.[1] ?? null;
+}

@@ -117,7 +117,7 @@ Discord's model, implemented in `packages/shared/src/permissions.ts` and unit-te
 
 ## Security measures
 
-- argon2id (64 MiB memory, 3 iterations). Constant-time-ish login (a dummy hash is verified when the user doesn't exist).
+- argon2id (19 MiB memory, 2 iterations — the OWASP baseline, light enough for a Pi). Constant-time-ish login (a dummy hash is verified when the user doesn't exist).
 - Session cookie: `HttpOnly`, `SameSite=Lax`, `Secure` when served over HTTPS; token is 256-bit random; only its hash is stored.
 - CSRF: unsafe requests must have an `Origin` header matching `PUBLIC_URL` (or no `Origin` but `Sec-Fetch-Site: same-origin`).
 - Rate limits (Valkey): auth (per IP and per account), messages (per user per channel + global per user),

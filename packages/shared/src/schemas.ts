@@ -690,3 +690,11 @@ export const CreateGameSchema = z
   .strict();
 
 export const GameMoveSchema = z.object({ move: z.unknown() }).strict();
+
+export const DeleteAccountSchema = z
+  .object({
+    password: z.string().min(1).max(Limits.PASSWORD_MAX),
+    /** Also delete every message you ever sent (can take a while). */
+    deleteMessages: z.boolean().default(false),
+  })
+  .strict();
