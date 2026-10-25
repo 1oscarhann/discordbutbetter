@@ -1,0 +1,5 @@
+pnpm-lock.yaml
+build
+dist
+.svelte-kit
+apps/desktop/src-tauri/target
