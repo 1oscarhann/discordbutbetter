@@ -4,7 +4,7 @@ build/
 .svelte-kit/
 .env
 *.log
-/data/
+data/
 coverage/
 apps/desktop/src-tauri/target/
 apps/desktop/src-tauri/gen/
