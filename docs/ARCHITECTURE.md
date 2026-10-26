@@ -132,6 +132,11 @@ Discord's model, implemented in `packages/shared/src/permissions.ts` and unit-te
 - Server-side fetches (link previews, image proxy) block private, loopback, link-local and metadata IP ranges,
   re-check on every redirect, and cap size and time.
 - Security headers on the app: strict CSP, `frame-ancestors 'none'`, `Referrer-Policy: no-referrer`.
+  `script-src` is `'self'` plus the sha256 of SvelteKit's inline bootstrap script, computed at startup — no `'unsafe-inline'`.
+- Client IPs for rate limiting: only a fixed number of proxy hops is trusted (`TRUST_PROXY`, 1 = Caddy), so the
+  client-controlled left side of `X-Forwarded-For` is ignored.
+- Gateway: browsers hide a failed WebSocket handshake's status, so after a handshake that never opened the client
+  checks `GET /users/@me`; a 401 sends it to the login page instead of retrying forever.
 
 ## Database schema
 
@@ -230,6 +235,11 @@ All under `/api`. Bodies are JSON unless noted. ★ = requires a specific permis
 **Files & lookups**
 `POST /files?purpose=` (multipart) · `GET /files/:id/:secret/:name?` (outside `/api`) · `GET /proxy/image?url=&sig=` ·
 `GET /search/games?q=` · `GET /search/music?q=` · `GET /emojis/:id` (redirect to the emoji's file)
+
+**Instance admin** (admins only; the flag is re-read from the database on every request)
+`GET /admin/stats` · `GET /admin/users?q=&offset=` · `PATCH /admin/users/:id` (disabled, isAdmin) ·
+`POST /admin/users/:id/reset-link` · `GET|POST /admin/invites` · `DELETE /admin/invites/:code` ·
+`GET /admin/guilds?q=&offset=` · `DELETE /admin/guilds/:id` (takedown)
 
 ## WebSocket gateway
 
