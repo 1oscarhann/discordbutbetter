@@ -1,0 +1,13 @@
+**/node_modules
+**/dist
+**/build
+**/.svelte-kit
+apps/desktop/src-tauri/target
+apps/desktop/src-tauri/gen
+.git
+.env
+.env.*
+!.env.example
+data
+**/*.log
+coverage

@@ -12,7 +12,22 @@ const EnvSchema = z.object({
   PUBLIC_URL: z.url().default('http://localhost:5173'),
   APP_NAME: z.string().min(1).max(40).default('discordbutbetter'),
   LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent']).optional(),
-  TRUST_PROXY: bool,
+  /**
+   * How many reverse proxies sit in front of the app. "true" means one (e.g. Caddy). We never trust
+   * the whole X-Forwarded-For chain: its leftmost entries come from the client and could be used
+   * to dodge per-IP rate limits.
+   */
+  TRUST_PROXY: z
+    .string()
+    .regex(/^(true|false|yes|no|\d{1,2})?$/i, { error: 'TRUST_PROXY must be true, false or a number of proxies' })
+    .optional()
+    .transform((v): number | undefined => {
+      if (v === undefined || v === '') return undefined;
+      const l = v.toLowerCase();
+      if (l === 'true' || l === 'yes') return 1;
+      if (l === 'false' || l === 'no') return 0;
+      return Number(l);
+    }),
 
   DATABASE_URL: z.string().default('postgres://dbb:dbb@localhost:5432/dbb'),
   REDIS_URL: z.string().default('redis://localhost:6379'),
@@ -89,7 +104,8 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env) {
     secureCookies: publicUrl.protocol === 'https:',
     appName: e.APP_NAME,
     logLevel: e.LOG_LEVEL ?? (production ? 'warn' : 'info'),
-    trustProxy: e.TRUST_PROXY ?? production,
+    /** Hop count for Fastify; false = use the socket address. */
+    trustProxy: ((e.TRUST_PROXY ?? (production ? 1 : 0)) || false) as number | false,
     databaseUrl: e.DATABASE_URL,
     redisUrl: e.REDIS_URL,
     secret,

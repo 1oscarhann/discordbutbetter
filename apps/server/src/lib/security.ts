@@ -21,6 +21,15 @@ export function checkOrigin(req: FastifyRequest, publicUrl: string): void {
 }
 
 /**
+ * Trust exactly `hops` reverse proxies. proxy-addr walks X-Forwarded-For from the right, so the
+ * client IP is the entry our own proxy appended; anything the client put in the header itself is
+ * ignored (otherwise anyone could fake their IP and dodge rate limits).
+ */
+export function trustProxyHops(hops: number | false): false | ((addr: string, hop: number) => boolean) {
+  return hops ? (_addr: string, hop: number) => hop < hops : false;
+}
+
+/**
  * SvelteKit's static index.html boots from one small inline script. Instead of allowing
  * 'unsafe-inline' we allow exactly those scripts by hash.
  */

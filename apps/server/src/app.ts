@@ -7,7 +7,7 @@ import path from 'node:path';
 import { existsSync, readFileSync } from 'node:fs';
 import type { Ctx } from './context.js';
 import { HttpError } from './errors.js';
-import { checkOrigin, inlineScriptHashes, registerSecurityHeaders } from './lib/security.js';
+import { checkOrigin, inlineScriptHashes, registerSecurityHeaders, trustProxyHops } from './lib/security.js';
 import { escapeHtml } from '@dbb/shared';
 import { resolveSession, sessionToken } from './auth/sessions.js';
 import { registerGateway } from './gateway/gateway.js';
@@ -32,7 +32,7 @@ export async function buildApp(ctx: Omit<Ctx, 'log'>, opts: { logger?: boolean }
               res: (res: { statusCode: number }) => ({ statusCode: res.statusCode }),
             },
           },
-    trustProxy: ctx.config.trustProxy,
+    trustProxy: trustProxyHops(ctx.config.trustProxy),
     bodyLimit: 1024 * 1024,
     routerOptions: { maxParamLength: 300 },
   });

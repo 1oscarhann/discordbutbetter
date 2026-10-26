@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Connect to a server</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="picker.js" defer></script>
+  </head>
+  <body>
+    <main class="card">
+      <h1>Connect to a server</h1>
+      <p class="muted">This app is a window onto a server someone runs (maybe you). Enter its address.</p>
+      <form id="form">
+        <label for="url">Server address</label>
+        <input id="url" name="url" placeholder="chat.example.com" autocomplete="url" autocapitalize="off" spellcheck="false" required />
+        <p id="warn" class="warn" hidden></p>
+        <p id="error" class="error" hidden></p>
+        <button id="go" type="submit">Connect</button>
+      </form>
+      <section id="recent-wrap" hidden>
+        <h2>Recent</h2>
+        <ul id="recent"></ul>
+      </section>
+      <p class="muted small">Tip: “Change server…” in the App menu brings you back here.</p>
+    </main>
+  </body>
+</html>

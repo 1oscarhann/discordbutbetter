@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Nothing. The picker page needs no native APIs, and the remote server page must never get any.",
+  "windows": [],
+  "permissions": []
+}

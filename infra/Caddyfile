@@ -1,0 +1,14 @@
+# Caddy gets a Let's Encrypt certificate for $DOMAIN automatically.
+# No access log is configured on purpose: Caddy doesn't write one unless asked, so client IPs aren't stored.
+{$DOMAIN} {
+	encode zstd gzip
+
+	# LiveKit signalling (WebSocket). Media itself uses the UDP/TCP ports published by the livekit service.
+	handle_path /livekit/* {
+		reverse_proxy livekit:7880
+	}
+
+	handle {
+		reverse_proxy app:3000
+	}
+}
