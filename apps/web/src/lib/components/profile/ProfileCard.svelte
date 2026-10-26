@@ -15,6 +15,7 @@
   import { api, del, errorMessage, get, post, put } from '$lib/api';
   import { loadFont, luminance, readableOn } from '$lib/theme';
   import { timeAgo } from '$lib/util/time';
+  import { copy } from '$lib/util/channel';
   import Avatar from '../Avatar.svelte';
   import Icon from '../Icon.svelte';
   import Markdown from '../Markdown.svelte';
@@ -321,7 +322,7 @@
             {#if g && canManageThem && (app.can(P.KICK_MEMBERS, guildId) || app.can(P.BAN_MEMBERS, guildId) || app.can(P.MODERATE_MEMBERS, guildId))}
               <button class="lnk" onclick={(e) => (modMenu = e.currentTarget)}><Icon name="shield" size={13} /> Moderate</button>
             {/if}
-            {#if app.settings.showIds}<button class="lnk" onclick={() => navigator.clipboard.writeText(userId)}>Copy ID</button>{/if}
+            {#if app.settings.showIds}<button class="lnk" onclick={() => copy(userId, 'ID copied')}>Copy ID</button>{/if}
           </div>
         </div>
       {/if}

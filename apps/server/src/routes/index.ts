@@ -13,6 +13,7 @@ import personalRoutes from './personal.js';
 import communityRoutes from './community.js';
 import activityRoutes from './activities.js';
 import lookupRoutes from './lookup.js';
+import adminRoutes from './admin.js';
 
 export async function routes(app: FastifyInstance) {
   await app.register(authRoutes);
@@ -29,5 +30,6 @@ export async function routes(app: FastifyInstance) {
   await app.register(communityRoutes);
   await app.register(activityRoutes);
   await app.register(lookupRoutes);
+  await app.register(adminRoutes);
   app.get('/health', async () => ({ ok: true }));
 }

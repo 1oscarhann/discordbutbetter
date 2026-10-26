@@ -14,6 +14,7 @@
   import VoiceTab from './user/VoiceTab.svelte';
   import SessionsTab from './user/SessionsTab.svelte';
   import DataTab from './user/DataTab.svelte';
+  import AdminTab from './user/AdminTab.svelte';
 
   let { initialTab }: { initialTab: string } = $props();
 
@@ -21,7 +22,7 @@
   const startGuild = initialTab.startsWith('server-profile:') ? initialTab.slice('server-profile:'.length) : null;
   let tab = $state(startGuild ? 'server-profiles' : initialTab);
 
-  const sections = [
+  const sections = $derived([
     {
       title: 'User settings',
       items: [
@@ -42,8 +43,9 @@
         { id: 'voice', label: 'Voice & video' },
       ],
     },
+    ...(app.me?.isAdmin ? [{ title: 'Instance', items: [{ id: 'admin', label: 'Instance admin' }] }] : []),
     { title: '', items: [{ id: 'logout', label: 'Log out', danger: true }] },
-  ];
+  ]);
 
   $effect(() => {
     if (tab === 'logout') {
@@ -79,6 +81,8 @@
       <NotificationsTab />
     {:else if tab === 'voice'}
       <VoiceTab />
+    {:else if tab === 'admin' && app.me?.isAdmin}
+      <AdminTab />
     {/if}
   {/key}
 </SettingsShell>

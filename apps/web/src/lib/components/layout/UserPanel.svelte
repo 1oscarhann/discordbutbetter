@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { copy } from '$lib/util/channel';
   import { goto } from '$app/navigation';
   import { Status, type StatusValue } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
@@ -101,7 +102,7 @@
       <div class="menu-sep"></div>
       <button class="menu-item" onclick={() => ((ui.profile = { userId: me.id, guildId: null }), (open = false))}><Icon name="eye" size={16} /> View my profile</button>
       <button class="menu-item" onclick={() => ((ui.settings = 'profile'), (open = false))}><Icon name="edit" size={16} /> Edit profile</button>
-      <button class="menu-item" onclick={() => (navigator.clipboard.writeText(me.username), (open = false), app.toast('Username copied'))}><Icon name="copy" size={16} /> Copy username</button>
+      <button class="menu-item" onclick={() => (copy(me.username, 'Username copied'), (open = false))}><Icon name="copy" size={16} /> Copy username</button>
     </div>
   </Popover>
 {/if}

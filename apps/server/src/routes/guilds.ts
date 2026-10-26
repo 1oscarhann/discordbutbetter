@@ -56,6 +56,22 @@ async function deleteGuildAttachments(ctx: Ctx, guildId: string) {
   }
 }
 
+/** Deletes a server and everything in it (files included) and tells every member's sessions. */
+export async function deleteGuild(ctx: Ctx, id: string): Promise<void> {
+  const [g] = await ctx.sql<GuildRow[]>`SELECT * FROM guilds WHERE id = ${id}`;
+  if (!g) throw notFound('Server not found');
+  const members = await ctx.sql<{ user_id: string }[]>`SELECT user_id FROM guild_members WHERE guild_id = ${id}`;
+  for (const m of members) {
+    const vs = await getUserVoice(ctx, m.user_id);
+    if (vs?.guildId === id) await disconnectVoice(ctx, m.user_id);
+  }
+  await deleteGuildFiles(ctx, id, g);
+  await deleteGuildAttachments(ctx, id);
+  await ctx.sql`DELETE FROM guilds WHERE id = ${id}`;
+  await ctx.redis.del(`vs:${id}`);
+  for (const m of members) ctx.bus.internalUser(m.user_id, '_GUILD_LEAVE', { guildId: id });
+}
+
 async function inviteObj(ctx: Ctx, code: string): Promise<Invite | null> {
   const [r] = await ctx.sql<
     {
@@ -192,16 +208,7 @@ export default async function guildRoutes(app: FastifyInstance) {
     const id = idParam(req, 'id');
     const a = await guildAccess(ctx, id, auth.userId);
     if (!a.isOwner) throw forbidden('Only the owner can delete the server');
-    const members = await ctx.sql<{ user_id: string }[]>`SELECT user_id FROM guild_members WHERE guild_id = ${id}`;
-    for (const m of members) {
-      const vs = await getUserVoice(ctx, m.user_id);
-      if (vs?.guildId === id) await disconnectVoice(ctx, m.user_id);
-    }
-    await deleteGuildFiles(ctx, id, a.data.guild);
-    await deleteGuildAttachments(ctx, id);
-    await ctx.sql`DELETE FROM guilds WHERE id = ${id}`;
-    await ctx.redis.del(`vs:${id}`);
-    for (const m of members) ctx.bus.internalUser(m.user_id, '_GUILD_LEAVE', { guildId: id });
+    await deleteGuild(ctx, id);
     return { ok: true };
   });
 

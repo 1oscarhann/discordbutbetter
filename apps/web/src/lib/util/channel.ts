@@ -22,6 +22,13 @@ export function disappearingLabel(s: number): string {
   return `${s / 86400} day${s === 86400 ? '' : 's'}`;
 }
 
+/** Copies to the clipboard; browsers can refuse (plain http, permissions), so never throw. */
 export function copy(text: string, label = 'Copied') {
-  void navigator.clipboard.writeText(text).then(() => app.toast(label, 'success'));
+  const fail = () => app.toast("Couldn't copy — your browser blocked clipboard access", 'error');
+  try {
+    if (!navigator.clipboard) return fail();
+    navigator.clipboard.writeText(text).then(() => app.toast(label, 'success'), fail);
+  } catch {
+    fail();
+  }
 }

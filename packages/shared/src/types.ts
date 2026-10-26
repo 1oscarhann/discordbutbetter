@@ -546,3 +546,45 @@ export interface ReadyPayload {
   sessionId: Id;
   serverTime: number;
 }
+
+// ---------- instance admin ----------
+
+export interface AdminStats {
+  users: number;
+  disabledUsers: number;
+  servers: number;
+  messages: number;
+  files: number;
+  fileBytes: number;
+  registration: InstanceInfo['registration'];
+  emailEnabled: boolean;
+  voiceEnabled: boolean;
+}
+
+export interface AdminUser extends PublicUser {
+  email: string | null;
+  emailVerified: boolean;
+  isAdmin: boolean;
+  disabled: boolean;
+  createdAt: string;
+  serverCount: number;
+}
+
+export interface AdminInvite {
+  code: string;
+  maxUses: number;
+  uses: number;
+  expiresAt: string | null;
+  createdAt: string;
+  createdBy: PublicUser | null;
+}
+
+export interface AdminGuild {
+  id: Id;
+  name: string;
+  icon: AssetUrl | null;
+  owner: PublicUser | null;
+  memberCount: number;
+  messageCount: number;
+  createdAt: string;
+}

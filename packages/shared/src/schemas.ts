@@ -698,3 +698,22 @@ export const DeleteAccountSchema = z
     deleteMessages: z.boolean().default(false),
   })
   .strict();
+
+// ---------- instance admin ----------
+
+export const AdminUserPatchSchema = z
+  .object({
+    disabled: z.boolean().optional(),
+    isAdmin: z.boolean().optional(),
+  })
+  .strict()
+  .refine((p) => p.disabled !== undefined || p.isAdmin !== undefined, { error: 'Nothing to change' });
+
+export const AdminInviteSchema = z
+  .object({
+    /** 0 = unlimited */
+    maxUses: z.number().int().min(0).max(1000).default(1),
+    /** 0 = never expires */
+    days: z.number().int().min(0).max(365).default(7),
+  })
+  .strict();

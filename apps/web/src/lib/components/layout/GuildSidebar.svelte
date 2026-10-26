@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { copy } from '$lib/util/channel';
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
   import { ChannelType, Permissions as P, type Channel } from '@haunt/shared';
@@ -241,7 +242,7 @@
         <Icon name={app.isChannelMuted(c.id) ? 'bell' : 'bell-off'} size={16} />
         {app.isChannelMuted(c.id) ? 'Unmute' : 'Mute'} channel
       </button>
-      <button class="menu-item" onclick={() => ((channelMenu = null), navigator.clipboard.writeText(`${location.origin}/app/${guildId}/${c.id}`))}>
+      <button class="menu-item" onclick={() => ((channelMenu = null), copy(`${location.origin}/app/${guildId}/${c.id}`, 'Link copied'))}>
         <Icon name="link" size={16} /> Copy link
       </button>
       {#if canManage}
