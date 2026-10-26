@@ -51,7 +51,7 @@
       <div>
         <div class="faint">{invite.inviter ? `${invite.inviter.displayName || invite.inviter.username} invited you to join` : 'Join'}</div>
         <div class="gname">{invite.guild.name}</div>
-        <div class="faint small">● {invite.guild.onlineCount} online · {invite.guild.memberCount} members</div>
+        <div class="faint small"><span class="on">●</span> {invite.guild.onlineCount} online · {invite.guild.memberCount} {invite.guild.memberCount === 1 ? 'member' : 'members'}</div>
       </div>
     </div>
     {#if invite.guild.description}<p class="muted">{invite.guild.description}</p>{/if}
@@ -65,6 +65,9 @@
 </AuthShell>
 
 <style>
+  .on {
+    color: var(--success);
+  }
   .inv {
     display: flex;
     gap: 14px;

@@ -107,6 +107,54 @@
   .content .inner {
     max-width: 740px;
   }
+  .content :global(h2) {
+    margin: 0 0 6px;
+    font-size: 1.25rem;
+  }
+  .content :global(h3) {
+    margin: 26px 0 8px;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+  }
+  .content :global(.srow) {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .content :global(label.srow) {
+    cursor: pointer;
+  }
+  .content :global(.srow .txt) {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .content :global(.srow .txt small),
+  .content :global(.srow .txt .sub) {
+    color: var(--text-faint);
+    font-size: 0.82rem;
+  }
+  .content :global(.radio) {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0;
+    cursor: pointer;
+  }
+  .content :global(.list-item) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: var(--bg-1);
+    margin-bottom: 6px;
+  }
   .footer {
     position: sticky;
     bottom: 0;

@@ -4,24 +4,24 @@
   import AuthShell from '$lib/components/AuthShell.svelte';
   import { errorMessage, post } from '$lib/api';
 
-  let state = $state<'working' | 'ok' | 'error'>('working');
+  let status = $state<'working' | 'ok' | 'error'>('working');
   let error = $state('');
 
   onMount(async () => {
     try {
       await post('/auth/verify-email', { token: page.url.searchParams.get('token') ?? '' });
-      state = 'ok';
+      status = 'ok';
     } catch (e) {
       error = errorMessage(e);
-      state = 'error';
+      status = 'error';
     }
   });
 </script>
 
 <AuthShell title="Email verification">
-  {#if state === 'working'}
+  {#if status === 'working'}
     <p class="muted">Checking your link…</p>
-  {:else if state === 'ok'}
+  {:else if status === 'ok'}
     <p>Your email is confirmed. 🎉</p>
     <a class="btn primary block" href="/app">Open the app</a>
   {:else}

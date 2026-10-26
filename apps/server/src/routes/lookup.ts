@@ -15,6 +15,8 @@ export interface LookupResult {
   subtitle?: string;
   sourceId: string;
   coverUrl: string | null;
+  /** Which game database the result came from (games only). */
+  source?: 'igdb' | 'rawg';
 }
 
 const ua = (ctx: Ctx) => `${ctx.config.appName}/1.0 (+${ctx.config.publicUrl})`;
@@ -50,6 +52,7 @@ async function searchGames(ctx: Ctx, q: string): Promise<LookupResult[]> {
       name: g.name,
       subtitle: g.first_release_date ? String(new Date(g.first_release_date * 1000).getUTCFullYear()) : undefined,
       sourceId: String(g.id),
+      source: 'igdb' as const,
       coverUrl: g.cover ? `https://images.igdb.com/igdb/image/upload/t_cover_big/${g.cover.image_id}.jpg` : null,
     }));
   }
@@ -64,6 +67,7 @@ async function searchGames(ctx: Ctx, q: string): Promise<LookupResult[]> {
       name: g.name,
       subtitle: g.released?.slice(0, 4),
       sourceId: String(g.id),
+      source: 'rawg' as const,
       coverUrl: g.background_image && isAllowedCoverUrl(g.background_image) ? g.background_image : null,
     }));
   }

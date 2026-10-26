@@ -29,7 +29,7 @@
   let {
     message: m,
     channel,
-    grouped = false,
+    grouped: groupedProp = false,
     flash = false,
     onReply,
     onJump,
@@ -45,6 +45,8 @@
     readBy?: string[];
     compactActions?: boolean;
   } = $props();
+  // compact mode repeats the name on every line, IRC-style
+  const grouped = $derived(groupedProp && !app.settings.compact);
 
   const guildId = $derived(channel.guildId);
   const authorId = $derived(m.author?.id ?? '');
@@ -402,8 +404,29 @@
     padding: 2px 48px 2px 16px;
     margin-top: 14px;
   }
-  [data-compact='1'] .msg {
-    margin-top: 6px;
+  :global([data-compact='1']) .msg {
+    grid-template-columns: 1fr;
+    margin-top: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+  :global([data-compact='1']) .gutter {
+    display: none;
+  }
+  :global([data-compact='1']) .head {
+    display: inline-flex;
+    float: left;
+    margin-right: 8px;
+    line-height: inherit;
+  }
+  :global([data-compact='1']) .head time {
+    order: -1;
+    min-width: 4.2em;
+  }
+  :global([data-compact='1']) .msg .main::after {
+    content: '';
+    display: block;
+    clear: both;
   }
   .msg.grouped {
     margin-top: 0;

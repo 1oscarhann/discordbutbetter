@@ -4,10 +4,11 @@ import multipart from '@fastify/multipart';
 import websocket from '@fastify/websocket';
 import fastifyStatic from '@fastify/static';
 import path from 'node:path';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import type { Ctx } from './context.js';
 import { HttpError } from './errors.js';
-import { checkOrigin, registerSecurityHeaders } from './lib/security.js';
+import { checkOrigin, inlineScriptHashes, registerSecurityHeaders } from './lib/security.js';
+import { escapeHtml } from '@dbb/shared';
 import { resolveSession, sessionToken } from './auth/sessions.js';
 import { registerGateway } from './gateway/gateway.js';
 import { routes } from './routes/index.js';
@@ -47,7 +48,13 @@ export async function buildApp(ctx: Omit<Ctx, 'log'>, opts: { logger?: boolean }
   });
   await app.register(websocket, { options: { maxPayload: 16 * 1024 } });
 
-  registerSecurityHeaders(app, ctx.config.livekit?.url ?? null, ctx.config.secureCookies);
+  // the built web client (if any): its shell page is served from memory with the instance name filled in
+  const webDir = ctx.config.webDir ? path.resolve(ctx.config.webDir) : null;
+  const indexHtml =
+    webDir && existsSync(path.join(webDir, 'index.html'))
+      ? readFileSync(path.join(webDir, 'index.html'), 'utf8').replace(/<title>[^<]*<\/title>/, () => `<title>${escapeHtml(ctx.config.appName)}</title>`)
+      : null;
+  registerSecurityHeaders(app, ctx.config.livekit?.url ?? null, ctx.config.secureCookies, indexHtml ? inlineScriptHashes(indexHtml) : []);
 
   app.addHook('onRequest', async (req) => {
     if (req.url.startsWith('/api/')) checkOrigin(req, ctx.config.publicUrl);
@@ -77,8 +84,7 @@ export async function buildApp(ctx: Omit<Ctx, 'log'>, opts: { logger?: boolean }
   registerFileServing(app);
   const gw = registerGateway(app);
 
-  const webDir = ctx.config.webDir ? path.resolve(ctx.config.webDir) : null;
-  if (webDir && existsSync(path.join(webDir, 'index.html'))) {
+  if (webDir && indexHtml) {
     await app.register(fastifyStatic, {
       root: webDir,
       wildcard: false,
@@ -93,8 +99,8 @@ export async function buildApp(ctx: Omit<Ctx, 'log'>, opts: { logger?: boolean }
     });
     app.get('/*', async (req, reply) => {
       const p = (req.params as { '*': string })['*'];
-      if (p && !p.includes('..') && existsSync(path.join(webDir, p)) && path.extname(p)) return reply.sendFile(p);
-      return reply.header('Cache-Control', 'no-cache').sendFile('index.html');
+      if (p && p !== 'index.html' && !p.includes('..') && existsSync(path.join(webDir, p)) && path.extname(p)) return reply.sendFile(p);
+      return reply.header('Cache-Control', 'no-cache').type('text/html; charset=utf-8').send(indexHtml);
     });
   }
 

@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { forbidden } from '../errors.js';
 
@@ -19,8 +20,21 @@ export function checkOrigin(req: FastifyRequest, publicUrl: string): void {
   if (site && site !== 'same-origin' && site !== 'none') throw forbidden('Cross-site request blocked');
 }
 
+/**
+ * SvelteKit's static index.html boots from one small inline script. Instead of allowing
+ * 'unsafe-inline' we allow exactly those scripts by hash.
+ */
+export function inlineScriptHashes(html: string): string[] {
+  const out: string[] = [];
+  for (const m of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)) {
+    if (/\ssrc=/i.test(m[0].slice(0, m[0].indexOf('>')))) continue;
+    out.push(`'sha256-${createHash('sha256').update(m[1]!, 'utf8').digest('base64')}'`);
+  }
+  return out;
+}
+
 /** Content Security Policy for the web app. */
-export function appCsp(livekitUrl: string | null): string {
+export function appCsp(livekitUrl: string | null, scriptHashes: string[] = []): string {
   const connect = ["'self'"];
   if (livekitUrl) {
     try {
@@ -32,7 +46,7 @@ export function appCsp(livekitUrl: string | null): string {
   }
   return [
     "default-src 'self'",
-    "script-src 'self'",
+    ["script-src 'self'", ...scriptHashes].join(' '),
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob:",
     "media-src 'self' blob:",
@@ -47,8 +61,8 @@ export function appCsp(livekitUrl: string | null): string {
   ].join('; ');
 }
 
-export function registerSecurityHeaders(app: FastifyInstance, livekitUrl: string | null, https: boolean): void {
-  const csp = appCsp(livekitUrl);
+export function registerSecurityHeaders(app: FastifyInstance, livekitUrl: string | null, https: boolean, scriptHashes: string[] = []): void {
+  const csp = appCsp(livekitUrl, scriptHashes);
   app.addHook('onSend', async (req: FastifyRequest, reply: FastifyReply) => {
     reply.header('X-Content-Type-Options', 'nosniff');
     reply.header('Referrer-Policy', 'no-referrer');

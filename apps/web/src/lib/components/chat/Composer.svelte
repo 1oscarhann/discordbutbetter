@@ -40,6 +40,19 @@
 
   let text = $state('');
   let files = $state<Pending[]>([]);
+  /** Enter was pressed while uploads were still running: send as soon as they finish. */
+  let sendWhenReady = $state(false);
+  $effect(() => {
+    if (!sendWhenReady) return;
+    if (!files.length) {
+      sendWhenReady = false;
+      return;
+    }
+    if (files.some((f) => !f.uploaded && !f.error)) return;
+    sendWhenReady = false;
+    if (files.some((f) => f.error)) app.toast('Some uploads failed — remove them and send again', 'error');
+    else void send();
+  });
   let reply = $state<{ messageId: string; ping: boolean } | null>(null);
   let editingId = $state<string | null>(null);
   let silent = $state(false);
@@ -51,7 +64,7 @@
   let slowUntil = $state(0);
   let now = $state(Date.now());
   let lastTyping = 0;
-  let fileInput: HTMLInputElement;
+  let fileInput = $state<HTMLInputElement | null>(null);
 
   const guildId = $derived(channel.guildId);
   const perms = $derived(app.perms(guildId, channel.id));
@@ -185,7 +198,10 @@
       isSilent = true;
     }
     if (!content && !files.length) return;
-    if (files.some((f) => !f.uploaded && !f.error)) return app.toast('Wait for uploads to finish');
+    if (files.some((f) => !f.uploaded && !f.error)) {
+      sendWhenReady = true;
+      return;
+    }
     if (files.some((f) => f.error)) return app.toast('Remove the failed uploads first', 'error');
     if (slowLeft > 0) return;
 
@@ -511,7 +527,7 @@
 
     <div class="box" class:silent>
       {#if canAttach && !editingId}
-        <button class="icon-btn" title="Upload files" onclick={() => fileInput.click()}><Icon name="plus" /></button>
+        <button class="icon-btn" title="Upload files" onclick={() => fileInput?.click()}><Icon name="plus" /></button>
         <input type="file" multiple hidden bind:this={fileInput} onchange={(e) => (addFiles((e.target as HTMLInputElement).files ?? []), ((e.target as HTMLInputElement).value = ''))} />
       {/if}
       <textarea

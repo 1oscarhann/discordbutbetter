@@ -127,13 +127,18 @@
 
   function kick() {
     modMenu = null;
-    ui.confirm(`Kick ${shownName}?`, 'They can rejoin with an invite.', 'Kick', () => del(`/guilds/${guildId}/members/${userId}`, {}).then(() => (ui.profile = null)));
+    ui.confirm(`Kick ${shownName}?`, 'They can rejoin with an invite.', 'Kick', async () => {
+      await del(`/guilds/${guildId}/members/${userId}`, {});
+      ui.profile = null;
+    });
   }
 
   function ban() {
     modMenu = null;
-    ui.confirm(`Ban ${shownName}?`, "They're removed and can't rejoin. Their messages from the last 24 hours are deleted too.", 'Ban', () =>
-      put(`/guilds/${guildId}/bans/${userId}`, { deleteMessageSeconds: 86400 }).then(() => (ui.profile = null)),
+    ui.confirm(`Ban ${shownName}?`, "They're removed and can't rejoin. Their messages from the last 24 hours are deleted too.", 'Ban', async () => {
+      await put(`/guilds/${guildId}/bans/${userId}`, { deleteMessageSeconds: 86400 });
+      ui.profile = null;
+    }
     );
   }
 </script>
@@ -177,7 +182,7 @@
       <div class="names">
         <h2 class="truncate">{shownName}</h2>
         <div class="un">
-          @{profile.username}{#if profile.pronouns} · {profile.pronouns}{/if}
+          @{profile.username}{#if profile.pronouns}&nbsp;·&nbsp;{profile.pronouns}{/if}
           {#if nick && profile.displayName && nick !== profile.displayName}<span class="faint"> · aka {profile.displayName}</span>{/if}
         </div>
       </div>
@@ -230,7 +235,7 @@
             </div>
           {/if}
           <ProfileWidgets widgets={profile.widgets} />
-          {#if guildId && member}
+          {#if guildId && member && (memberRoles.length || (canRoles && (canManageThem || isMe)))}
             <section class="sect">
               <h4>Roles</h4>
               <div class="roles">

@@ -10,9 +10,15 @@ export function proxiedImage(url: string | null | undefined, width?: number): st
   return `/api/proxy/image?${q.toString()}`;
 }
 
+/** "Alice Smith" -> "AS"; emoji and symbols are skipped ("Alice ✨" -> "A"). */
 export function initials(name: string): string {
-  const parts = name.trim().split(/\s+/).slice(0, 2);
-  return parts.map((p) => [...p][0] ?? '').join('').toUpperCase() || '?';
+  const words = name.trim().split(/\s+/).filter((w) => /^[\p{L}\p{N}]/u.test(w));
+  const out = words
+    .slice(0, 2)
+    .map((w) => [...w][0] ?? '')
+    .join('')
+    .toUpperCase();
+  return out || [...name.trim()][0] || '?';
 }
 
 export function formatBytes(n: number): string {

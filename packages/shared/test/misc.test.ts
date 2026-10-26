@@ -5,6 +5,7 @@ import { GAMES, anagramCatchUp } from '../src/games/index.js';
 import { levelFromXp, totalXpFor } from '../src/levels.js';
 import { CreateMessageSchema, ProfilePatchSchema, RegisterSchema, OverwriteSchema, CustomStatusSchema } from '../src/schemas.js';
 import { snowflakeFromTime, snowflakeTime, compareIds } from '../src/constants.js';
+import { initials } from '../src/assets.js';
 
 describe('themes', () => {
   it('round-trips', () => {
@@ -223,5 +224,20 @@ describe('games', () => {
     anagramCatchUp(s, Math.random, 2000 + 46_000);
     expect(s.status).toBe('finished');
     expect(s.winners).toEqual(['p']);
+  });
+});
+
+describe('initials', () => {
+  it('uses the first letter of up to two words', () => {
+    expect(initials('Alice Smith')).toBe('AS');
+    expect(initials('bob')).toBe('B');
+  });
+  it('skips emoji and symbol words', () => {
+    expect(initials('Alice ✨')).toBe('A');
+    expect(initials('✨ star club')).toBe('SC');
+  });
+  it('falls back to the first character', () => {
+    expect(initials('✨')).toBe('✨');
+    expect(initials('   ')).toBe('?');
   });
 });

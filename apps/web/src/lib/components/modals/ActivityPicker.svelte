@@ -17,6 +17,7 @@
     subtitle?: string;
     sourceId: string;
     coverUrl: string | null;
+    source?: 'igdb' | 'rawg';
   }
 
   const me = $derived(app.me!);
@@ -59,7 +60,7 @@
     error = '';
     try {
       if (kind === 'playing') {
-        await put('/users/@me/activity/playing', { name: r.name, source: app.instance?.gameSearch ? 'igdb' : 'custom', sourceId: r.sourceId, coverUrl: r.coverUrl, lfg });
+        await put('/users/@me/activity/playing', { name: r.name, source: r.source ?? 'custom', sourceId: r.source ? r.sourceId : null, coverUrl: r.coverUrl, lfg });
       } else {
         await put('/users/@me/activity/listening', { title: r.name, artist: r.subtitle || 'Unknown artist', coverUrl: r.coverUrl });
       }

@@ -12,7 +12,7 @@
    */
   let { channel, onclose }: { channel: Channel; onclose: () => void } = $props();
 
-  const state = $derived(app.watch.get(channel.id) ?? null);
+  const ws = $derived(app.watch.get(channel.id) ?? null);
   let iframe = $state<HTMLIFrameElement | null>(null);
   let box = $state<HTMLDivElement | null>(null);
   let url = $state('');
@@ -61,8 +61,8 @@
   function onPlayerState(ps: number) {
     const was = playerState;
     playerState = ps;
-    if (ps === 0 && was !== 0 && state?.videoId) {
-      void post(`/channels/${channel.id}/watch`, { action: 'ended', videoId: state.videoId }).catch(() => {});
+    if (ps === 0 && was !== 0 && ws?.videoId) {
+      void post(`/channels/${channel.id}/watch`, { action: 'ended', videoId: ws.videoId }).catch(() => {});
     }
   }
 
@@ -79,7 +79,7 @@
 
   // load a new video when the shared one changes
   $effect(() => {
-    const s = state;
+    const s = ws;
     if (!s?.videoId || !ready) return;
     if (s.videoId !== loadedId) {
       loadedId = s.videoId;
@@ -91,14 +91,14 @@
   // drift correction loop
   $effect(() => {
     const timer = setInterval(() => {
-      const s = state;
+      const s = ws;
       if (!s?.videoId || !ready || s.videoId !== loadedId) return;
       const want = target(s);
       if (s.playing && playerState !== 1 && playerState !== 3) {
         cmd('playVideo');
         // if autoplay was blocked the state won't change: ask for a click
         setTimeout(() => {
-          if (playerState !== 1 && playerState !== 3 && state?.playing) needsClick = true;
+          if (playerState !== 1 && playerState !== 3 && ws?.playing) needsClick = true;
         }, 1500);
       }
       if (!s.playing && playerState === 1) cmd('pauseVideo');
@@ -122,20 +122,20 @@
   async function load(e: Event) {
     e.preventDefault();
     if (!url.trim()) return;
-    await control({ action: state?.videoId ? 'queue_add' : 'load', url: url.trim() });
+    await control({ action: ws?.videoId ? 'queue_add' : 'load', url: url.trim() });
     url = '';
   }
 
   function seekBy(d: number) {
-    if (!state) return;
-    void control({ action: 'seek', position: Math.max(0, target(state) + d) });
+    if (!ws) return;
+    void control({ action: 'seek', position: Math.max(0, target(ws) + d) });
   }
 
   // the iframe starts on the current video; later changes go through loadVideoById (no reload)
   let initialId = $state<string | null>(null);
   let initialStart = 0;
   $effect(() => {
-    const s = state;
+    const s = ws;
     if (!s?.videoId) {
       initialId = null;
       loadedId = '';
@@ -167,7 +167,7 @@
 
 <section class="watch">
   <div class="player" bind:this={box}>
-    {#if state?.videoId && embedSrc}
+    {#if ws?.videoId && embedSrc}
       <iframe
         bind:this={iframe}
         src={embedSrc}
@@ -189,17 +189,17 @@
     {/if}
   </div>
 
-  {#if state?.videoId}
+  {#if ws?.videoId}
     <div class="bar">
-      <button class="icon-btn" title={state.playing ? 'Pause' : 'Play'} onclick={() => control({ action: state.playing ? 'pause' : 'play', position: target(state) })}>
-        <Icon name={state.playing ? 'pause' : 'play'} />
+      <button class="icon-btn" title={ws.playing ? 'Pause' : 'Play'} onclick={() => control({ action: ws.playing ? 'pause' : 'play', position: target(ws) })}>
+        <Icon name={ws.playing ? 'pause' : 'play'} />
       </button>
       <button class="icon-btn" title="Back 10s" onclick={() => seekBy(-10)}>-10</button>
       <button class="icon-btn" title="Forward 10s" onclick={() => seekBy(10)}>+10</button>
       <button class="icon-btn" title="Next in queue" onclick={() => control({ action: 'next' })}><Icon name="skip" size={18} /></button>
       <span class="time faint">{duration(localTime)}</span>
-      <span class="title truncate" title={state.title ?? ''}>{state.title}</span>
-      <select class="select rate" value={state.rate} onchange={(e) => control({ action: 'rate', rate: Number((e.target as HTMLSelectElement).value) })}>
+      <span class="title truncate" title={ws.title ?? ''}>{ws.title}</span>
+      <select class="select rate" value={ws.rate} onchange={(e) => control({ action: 'rate', rate: Number((e.target as HTMLSelectElement).value) })}>
         {#each [0.5, 1, 1.25, 1.5, 2] as r (r)}<option value={r}>{r}×</option>{/each}
       </select>
       <button class="icon-btn" title={muted ? 'Unmute (just you)' : 'Mute (just you)'} onclick={() => (muted = !muted)}><Icon name={muted ? 'speaker-off' : 'speaker'} size={18} /></button>
@@ -210,14 +210,14 @@
   {/if}
 
   <form class="add" onsubmit={load}>
-    <input class="input" placeholder={state?.videoId ? 'Add a YouTube link to the queue' : 'YouTube link'} bind:value={url} />
-    <button class="btn primary small">{state?.videoId ? 'Queue' : 'Play'}</button>
-    {#if !state?.videoId}<button type="button" class="btn small ghost" onclick={onclose}>Close</button>{/if}
+    <input class="input" placeholder={ws?.videoId ? 'Add a YouTube link to the queue' : 'YouTube link'} bind:value={url} />
+    <button class="btn primary small">{ws?.videoId ? 'Queue' : 'Play'}</button>
+    {#if !ws?.videoId}<button type="button" class="btn small ghost" onclick={onclose}>Close</button>{/if}
   </form>
 
-  {#if state?.queue.length}
+  {#if ws?.queue.length}
     <ol class="queue">
-      {#each state.queue as q, i (`${q.videoId}${i}`)}
+      {#each ws.queue as q, i (`${q.videoId}${i}`)}
         <li>
           <span class="truncate">{q.title}</span>
           <span class="faint small">added by {app.displayName(q.addedBy, channel.guildId)}</span>

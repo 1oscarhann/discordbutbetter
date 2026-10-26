@@ -10,7 +10,7 @@
   import Popover from '../Popover.svelte';
   import StatusDot from '../StatusDot.svelte';
 
-  let anchor: HTMLElement;
+  let anchor = $state<HTMLElement | null>(null);
   let open = $state(false);
   let screenMenu = $state<HTMLElement | null>(null);
 

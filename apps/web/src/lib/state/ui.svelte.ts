@@ -21,6 +21,7 @@ class UiState {
   thread = $state<string | null>(null);
   searchQuery = $state('');
   mobileNav = $state(false);
+  quickSwitcher = $state(false);
   /** Message to scroll to and flash once the channel loads. */
   jumpTo = $state<{ channelId: string; messageId: string } | null>(null);
   reportConfirm = $state<{ title: string; body: string; danger?: boolean; confirm: string; onconfirm: () => void | Promise<void> } | null>(null);

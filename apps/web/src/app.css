@@ -499,3 +499,9 @@ select {
     font-size: calc(15px * var(--font-scale));
   }
 }
+
+input[type='range'],
+input[type='checkbox'],
+input[type='radio'] {
+  accent-color: var(--accent);
+}

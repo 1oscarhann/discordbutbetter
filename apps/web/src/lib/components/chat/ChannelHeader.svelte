@@ -9,6 +9,7 @@
   import Avatar from '../Avatar.svelte';
   import Markdown from '../Markdown.svelte';
   import StatusDot from '../StatusDot.svelte';
+  import GameLauncher from '../activities/GameLauncher.svelte';
 
   let { channel }: { channel: Channel } = $props();
 
@@ -17,6 +18,7 @@
   const presence = $derived(other ? app.presence(other.id) : null);
   const parent = $derived(channel.type === ChannelType.THREAD && channel.parentId ? app.channel(channel.parentId) : null);
   let q = $state('');
+  let gameAnchor = $state<HTMLElement | null>(null);
 
   function togglePanel(p: RightPanel) {
     ui.thread = null;
@@ -73,6 +75,9 @@
   {/if}
   <div class="spacer"></div>
   <div class="tools">
+    {#if isDm}
+      <button class="icon-btn" class:active={!!gameAnchor} title="Play a game" onclick={(e) => (gameAnchor = gameAnchor ? null : (e.currentTarget as HTMLElement))}><Icon name="gamepad" /></button>
+    {/if}
     {#if channel.type === ChannelType.TEXT}
       <button class="icon-btn" class:active={ui.rightPanel === 'threads'} title="Threads" onclick={() => togglePanel('threads')}><Icon name="thread" /></button>
     {/if}
@@ -94,6 +99,8 @@
     </form>
   </div>
 </header>
+
+{#if gameAnchor}<GameLauncher anchor={gameAnchor} {channel} onclose={() => (gameAnchor = null)} />{/if}
 
 <style>
   .hdr {

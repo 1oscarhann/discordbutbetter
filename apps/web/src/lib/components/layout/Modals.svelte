@@ -18,6 +18,7 @@
   import ChannelSettings from '../settings/ChannelSettings.svelte';
   import GuildSettings from '../settings/GuildSettings.svelte';
   import UserSettings from '../settings/UserSettings.svelte';
+  import QuickSwitcher from '../modals/QuickSwitcher.svelte';
 
   let confirmBusy = $state(false);
   let confirmError = $state('');
@@ -66,7 +67,6 @@
       {#if ui.lightbox.download}<a href={ui.lightbox.download} download onclick={(e) => e.stopPropagation()}>Download</a>{/if}
     </div>
   </div>
-  <svelte:window onkeydown={(e) => e.key === 'Escape' && (ui.lightbox = null)} />
 {/if}
 
 {#if ui.confirmLink}
@@ -106,10 +106,16 @@
 {#if ui.channelSettings}<ChannelSettings target={ui.channelSettings} />{/if}
 {#if ui.guildSettings}<GuildSettings guildId={ui.guildSettings.guildId} initialTab={ui.guildSettings.tab} />{/if}
 {#if ui.settings}<UserSettings initialTab={ui.settings} />{/if}
+{#if ui.quickSwitcher}<QuickSwitcher />{/if}
 
 <!-- global shortcuts -->
 <svelte:window
   onkeydown={(e) => {
+    if (e.key === 'Escape' && ui.lightbox) ui.lightbox = null;
+    if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'k' && app.me) {
+      e.preventDefault();
+      ui.quickSwitcher = !ui.quickSwitcher;
+    }
     if ((e.ctrlKey || e.metaKey) && e.key === ',') {
       e.preventDefault();
       ui.settings = 'account';

@@ -145,7 +145,6 @@ const settingsFields = {
   compact: [z.boolean(), false],
   fontScale: [z.number().min(0.8).max(1.4), 1],
   reduceMotion: [z.boolean(), false],
-  animateEmoji: [z.boolean(), true],
   showEmbeds: [z.boolean(), true],
   autoplayProfileSongs: [z.boolean(), false],
   profileSongVolume: [z.number().min(0).max(1), 0.5],

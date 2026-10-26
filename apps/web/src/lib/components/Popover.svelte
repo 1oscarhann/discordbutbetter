@@ -77,6 +77,6 @@
 <style>
   .pop {
     position: fixed;
-    z-index: 80;
+    z-index: 120;
   }
 </style>
