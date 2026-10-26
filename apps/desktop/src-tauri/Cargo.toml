@@ -1,5 +1,5 @@
 [package]
-name = "dbb-desktop"
+name = "haunt-desktop"
 version = "0.1.0"
 description = "Desktop shell for a self-hosted chat server"
 edition = "2021"
@@ -7,7 +7,7 @@ rust-version = "1.90"
 publish = false
 
 [lib]
-name = "dbb_desktop_lib"
+name = "haunt_desktop_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]

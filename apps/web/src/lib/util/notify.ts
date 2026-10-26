@@ -1,4 +1,4 @@
-import type { ClientSettings } from '@dbb/shared';
+import type { ClientSettings } from '@haunt/shared';
 
 let ctx: AudioContext | null = null;
 

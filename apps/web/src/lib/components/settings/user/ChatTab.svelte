@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ClientSettings } from '@dbb/shared';
+  import type { ClientSettings } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
 
   const s = $derived(app.settings);

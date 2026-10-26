@@ -1,5 +1,5 @@
-import type { FilePurposeValue, GameRef, GameRefInput, SongRef, SongRefInput } from '@dbb/shared';
-import { fileIdFromUrl } from '@dbb/shared';
+import type { FilePurposeValue, GameRef, GameRefInput, SongRef, SongRefInput } from '@haunt/shared';
+import { fileIdFromUrl } from '@haunt/shared';
 import type { Ctx } from '../context.js';
 import { claimFile, deleteFile, fileUrl } from '../routes/files.js';
 

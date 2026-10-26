@@ -1,7 +1,7 @@
 import type { FastifyInstance } from 'fastify';
 import { createHash, timingSafeEqual } from 'node:crypto';
 import sharp from 'sharp';
-import { isAllowedCoverUrl } from '@dbb/shared';
+import { isAllowedCoverUrl } from '@haunt/shared';
 import { requireAuth } from '../lib/validate.js';
 import { limitPreset } from '../lib/ratelimit.js';
 import { badRequest, forbidden, unavailable } from '../errors.js';

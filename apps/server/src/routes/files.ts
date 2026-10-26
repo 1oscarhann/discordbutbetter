@@ -3,7 +3,7 @@ import { timingSafeEqual } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { rm } from 'node:fs/promises';
-import { FilePurpose, type FilePurposeValue } from '@dbb/shared';
+import { FilePurpose, type FilePurposeValue } from '@haunt/shared';
 import type { Ctx } from '../context.js';
 import type { FileRow } from '../rows.js';
 import { badRequest, notFound, tooLarge } from '../errors.js';
@@ -69,7 +69,7 @@ export async function handleUpload(ctx: Ctx, req: FastifyRequest): Promise<Uploa
   const part = await req.file();
   if (!part) throw badRequest('No file');
   const max = maxBytesFor(purpose, ctx.config.limits);
-  const tmp = path.join(tmpdir(), 'dbb-upload', `${snowflake()}.part`);
+  const tmp = path.join(tmpdir(), 'haunt-upload', `${snowflake()}.part`);
   let size: number;
   try {
     size = await streamToTemp(part.file, tmp, max);

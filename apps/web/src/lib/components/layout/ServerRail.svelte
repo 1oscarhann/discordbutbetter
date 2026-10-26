@@ -7,7 +7,7 @@
   import Icon from '../Icon.svelte';
   import Popover from '../Popover.svelte';
   import { del, errorMessage, patch } from '$lib/api';
-  import { Permissions as P } from '@dbb/shared';
+  import { Permissions as P } from '@haunt/shared';
 
   const active = $derived(page.params.guildId ?? null);
 

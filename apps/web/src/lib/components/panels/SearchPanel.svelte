@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import type { Channel, SearchResult } from '@dbb/shared';
+  import type { Channel, SearchResult } from '@haunt/shared';
   import { errorMessage, get } from '$lib/api';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';

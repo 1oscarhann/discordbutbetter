@@ -1,4 +1,4 @@
-import { snowflakeTime } from '@dbb/shared';
+import { snowflakeTime } from '@haunt/shared';
 
 export function timeAgo(iso: string | number, now = Date.now()): string {
   const t = typeof iso === 'number' ? iso : new Date(iso).getTime();

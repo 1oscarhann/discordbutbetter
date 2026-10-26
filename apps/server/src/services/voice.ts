@@ -1,5 +1,5 @@
 import { AccessToken, RoomServiceClient, TrackSource, WebhookReceiver } from 'livekit-server-sdk';
-import type { VoiceState } from '@dbb/shared';
+import type { VoiceState } from '@haunt/shared';
 import type { Config } from '../config.js';
 import type { Ctx } from '../context.js';
 

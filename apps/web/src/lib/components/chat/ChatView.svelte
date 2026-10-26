@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ChannelType, Permissions as P, isDmType } from '@dbb/shared';
+  import { ChannelType, Permissions as P, isDmType } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { get } from '$lib/api';

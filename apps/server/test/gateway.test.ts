@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { ChannelType, Permissions as P } from '@dbb/shared';
+import { ChannelType, Permissions as P } from '@haunt/shared';
 import { connectGateway, createTestApp, guildWith, register, sleep, type Client, type TestApp } from './helpers.js';
 
 let t: TestApp;

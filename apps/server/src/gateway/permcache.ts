@@ -1,4 +1,4 @@
-import { ChannelType, Permissions as P, has, type PermOverwrite } from '@dbb/shared';
+import { ChannelType, Permissions as P, has, type PermOverwrite } from '@haunt/shared';
 import type { Db } from '../db.js';
 import {
   channelPermissionsOf,

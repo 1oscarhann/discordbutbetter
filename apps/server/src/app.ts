@@ -8,7 +8,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import type { Ctx } from './context.js';
 import { HttpError } from './errors.js';
 import { checkOrigin, inlineScriptHashes, registerSecurityHeaders, trustProxyHops } from './lib/security.js';
-import { escapeHtml } from '@dbb/shared';
+import { escapeHtml } from '@haunt/shared';
 import { resolveSession, sessionToken } from './auth/sessions.js';
 import { registerGateway } from './gateway/gateway.js';
 import { routes } from './routes/index.js';

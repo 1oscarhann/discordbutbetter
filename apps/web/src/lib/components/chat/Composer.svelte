@@ -15,7 +15,7 @@
     type Channel,
     type Message,
     type Sticker,
-  } from '@dbb/shared';
+  } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { api, errorMessage, post, upload, type UploadedFile } from '$lib/api';

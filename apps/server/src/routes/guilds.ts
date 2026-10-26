@@ -12,7 +12,7 @@ import {
   TransferGuildSchema,
   has,
   type Invite,
-} from '@dbb/shared';
+} from '@haunt/shared';
 import type { ChannelRow, GuildRow, UserRow } from '../rows.js';
 import { idParam, parse, requireAuth, strParam } from '../lib/validate.js';
 import { limitPreset } from '../lib/ratelimit.js';

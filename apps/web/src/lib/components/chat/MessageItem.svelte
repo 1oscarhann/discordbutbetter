@@ -10,7 +10,7 @@
     plainPreview,
     type Channel,
     type Message,
-  } from '@dbb/shared';
+  } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { api, del, errorMessage, post, put } from '$lib/api';

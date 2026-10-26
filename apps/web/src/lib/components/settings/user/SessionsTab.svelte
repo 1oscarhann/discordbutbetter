@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Session } from '@dbb/shared';
+  import type { Session } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { del, errorMessage, get } from '$lib/api';

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Limits, Permissions as P, fileIdFromUrl, type UserProfile } from '@dbb/shared';
+  import { Limits, Permissions as P, fileIdFromUrl, type UserProfile } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { errorMessage, patch } from '$lib/api';
   import ImagePicker from '../../ImagePicker.svelte';

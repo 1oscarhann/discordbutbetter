@@ -1,4 +1,4 @@
-import type { InstanceInfo } from '@dbb/shared';
+import type { InstanceInfo } from '@haunt/shared';
 import type { Ctx } from '../context.js';
 
 export function instanceInfo(ctx: Ctx): InstanceInfo {

@@ -1,4 +1,4 @@
-import type { AuditActionValue } from '@dbb/shared';
+import type { AuditActionValue } from '@haunt/shared';
 import type { Db } from '../db.js';
 import { snowflake } from '../ids.js';
 

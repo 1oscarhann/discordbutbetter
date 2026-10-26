@@ -10,7 +10,7 @@ import {
   type Channel,
   type ClientMessage,
   type ServerMessage,
-} from '@dbb/shared';
+} from '@haunt/shared';
 import type { Ctx } from '../context.js';
 import type { Envelope } from '../lib/bus.js';
 import { PermCache } from './permcache.js';

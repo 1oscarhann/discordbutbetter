@@ -1,6 +1,6 @@
 <script lang="ts">
   import { tick, untrack } from 'svelte';
-  import { ChannelType, MessageType, compareIds, isDmType, type Channel, type Message } from '@dbb/shared';
+  import { ChannelType, MessageType, compareIds, isDmType, type Channel, type Message } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { get } from '$lib/api';

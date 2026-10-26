@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { proxiedImage, type ProfileWidget } from '@dbb/shared';
+  import { proxiedImage, type ProfileWidget } from '@haunt/shared';
   import { ui } from '$lib/state/ui.svelte';
   import Markdown from '../Markdown.svelte';
   import Icon from '../Icon.svelte';

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import type { FullGuild } from '@dbb/shared';
+  import type { FullGuild } from '@haunt/shared';
   import { ui } from '$lib/state/ui.svelte';
   import { errorMessage, post, type UploadedFile } from '$lib/api';
   import Modal from '../Modal.svelte';

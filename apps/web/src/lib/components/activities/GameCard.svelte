@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { C4_COLS, GAMES, type Channel, type GameSession } from '@dbb/shared';
+  import { C4_COLS, GAMES, type Channel, type GameSession } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { errorMessage, get, post } from '$lib/api';
   import Avatar from '../Avatar.svelte';

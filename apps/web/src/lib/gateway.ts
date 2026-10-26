@@ -1,4 +1,4 @@
-import type { ClientMessage, GatewayEventName, GatewayEvents, ServerMessage } from '@dbb/shared';
+import type { ClientMessage, GatewayEventName, GatewayEvents, ServerMessage } from '@haunt/shared';
 
 type Handler = <K extends GatewayEventName>(t: K, d: GatewayEvents[K]) => void;
 
@@ -31,6 +31,8 @@ export class Gateway {
     this.setStatus('connecting');
     const ws = new WebSocket(`${proto}//${location.host}/gateway`);
     this.ws = ws;
+    let opened = false;
+    ws.onopen = () => (opened = true);
     ws.onmessage = (ev) => this.handle(JSON.parse(String(ev.data)) as ServerMessage);
     ws.onclose = (ev) => {
       this.clearHeartbeat();
@@ -43,11 +45,38 @@ export class Gateway {
       }
       if (this.stopped) return this.setStatus('closed', false);
       this.setStatus('closed', true);
-      const delay = Math.min(30_000, 1000 * 2 ** this.retry) * (0.7 + Math.random() * 0.6);
-      this.retry++;
-      setTimeout(() => !this.stopped && this.connect(), delay);
+      if (!opened) {
+        // The handshake itself failed. Browsers hide the HTTP status of a failed WebSocket
+        // handshake, so ask the API whether we're still logged in before retrying forever.
+        void this.stillLoggedIn().then((ok) => {
+          if (this.stopped) return;
+          if (ok === false) {
+            this.setStatus('closed', false);
+            this.onInvalid();
+          } else this.scheduleRetry();
+        });
+        return;
+      }
+      this.scheduleRetry();
     };
     this.watchIdle();
+  }
+
+  private scheduleRetry() {
+    const delay = Math.min(30_000, 1000 * 2 ** this.retry) * (0.7 + Math.random() * 0.6);
+    this.retry++;
+    setTimeout(() => !this.stopped && this.connect(), delay);
+  }
+
+  /** true / false, or null when the server couldn't be reached at all. */
+  private async stillLoggedIn(): Promise<boolean | null> {
+    try {
+      const res = await fetch('/api/users/@me', { credentials: 'same-origin', cache: 'no-store' });
+      if (res.status === 401) return false;
+      return res.ok ? true : null;
+    } catch {
+      return null;
+    }
   }
 
   disconnect() {

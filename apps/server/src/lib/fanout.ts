@@ -1,4 +1,4 @@
-import { ChannelType, isDmType, type GatewayEventName, type GatewayEvents } from '@dbb/shared';
+import { ChannelType, isDmType, type GatewayEventName, type GatewayEvents } from '@haunt/shared';
 import type { Ctx } from '../context.js';
 import type { ChannelRow } from '../rows.js';
 

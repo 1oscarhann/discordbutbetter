@@ -17,9 +17,9 @@ RUN pnpm install --frozen-lockfile
 COPY packages/shared packages/shared
 COPY apps/server apps/server
 COPY apps/web apps/web
-RUN pnpm --filter @dbb/web build \
- && pnpm --filter @dbb/server build \
- && pnpm --filter @dbb/server deploy --prod --legacy /out
+RUN pnpm --filter @haunt/web build \
+ && pnpm --filter @haunt/server build \
+ && pnpm --filter @haunt/server deploy --prod --legacy /out
 
 # ---------- runtime ----------
 FROM node:22-alpine

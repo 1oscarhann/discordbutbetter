@@ -10,7 +10,7 @@ import {
   isDmType,
   type Message,
   type MessageTypeValue,
-} from '@dbb/shared';
+} from '@haunt/shared';
 import type { Ctx } from '../context.js';
 import type { ChannelRow, GuildRow } from '../rows.js';
 import { badRequest, forbidden, notFound, tooMany } from '../errors.js';

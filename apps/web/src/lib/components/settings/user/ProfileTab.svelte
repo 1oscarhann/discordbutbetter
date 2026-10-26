@@ -13,7 +13,7 @@
     type ProfileWidget,
     type SelfUser,
     type UserProfile,
-  } from '@dbb/shared';
+  } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { errorMessage, patch, upload } from '$lib/api';
   import ImagePicker from '../../ImagePicker.svelte';

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { formatBytes, type CustomEmoji } from '@dbb/shared';
+  import { formatBytes, type CustomEmoji } from '@haunt/shared';
   import { app, type GuildState } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { del, errorMessage, patch, post, upload } from '$lib/api';

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Limits } from '@dbb/shared';
+  import { Limits } from '@haunt/shared';
   import { ui } from '$lib/state/ui.svelte';
   import { app } from '$lib/state/app.svelte';
   import { errorMessage, put } from '$lib/api';

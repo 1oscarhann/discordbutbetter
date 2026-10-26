@@ -1,7 +1,7 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
-  import { ChannelType, Permissions as P, type Channel } from '@dbb/shared';
+  import { ChannelType, Permissions as P, type Channel } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { voice } from '$lib/state/voice.svelte';

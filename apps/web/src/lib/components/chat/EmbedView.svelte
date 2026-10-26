@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Embed } from '@dbb/shared';
+  import type { Embed } from '@haunt/shared';
   import { ui } from '$lib/state/ui.svelte';
   import Icon from '../Icon.svelte';
 

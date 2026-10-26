@@ -3,7 +3,7 @@
   import { page } from '$app/state';
   import AuthShell from '$lib/components/AuthShell.svelte';
   import { errorMessage, get, post } from '$lib/api';
-  import { RegisterSchema, type InstanceInfo } from '@dbb/shared';
+  import { RegisterSchema, type InstanceInfo } from '@haunt/shared';
 
   let username = $state('');
   let email = $state('');

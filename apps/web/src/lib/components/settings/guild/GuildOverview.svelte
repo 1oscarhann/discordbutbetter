@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { ChannelType } from '@dbb/shared';
+  import { ChannelType } from '@haunt/shared';
   import { app, type GuildState } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { del, errorMessage, patch, post, type UploadedFile } from '$lib/api';

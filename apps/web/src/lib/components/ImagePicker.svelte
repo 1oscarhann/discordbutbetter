@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { FilePurposeValue } from '@dbb/shared';
+  import type { FilePurposeValue } from '@haunt/shared';
   import { errorMessage, upload, type UploadedFile } from '$lib/api';
   import Icon from './Icon.svelte';
 

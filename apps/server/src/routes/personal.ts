@@ -12,7 +12,7 @@ import {
   has,
   type Bookmark,
   type ScheduledMessage,
-} from '@dbb/shared';
+} from '@haunt/shared';
 import { idParam, parse, requireAuth } from '../lib/validate.js';
 import { limitPreset } from '../lib/ratelimit.js';
 import { badRequest, forbidden, notFound } from '../errors.js';

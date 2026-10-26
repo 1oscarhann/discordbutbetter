@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { initials } from '@dbb/shared';
-  import type { VisibleStatus } from '@dbb/shared';
+  import { initials } from '@haunt/shared';
+  import type { VisibleStatus } from '@haunt/shared';
   import StatusDot from './StatusDot.svelte';
 
   let {

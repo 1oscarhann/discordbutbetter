@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { GAMES, GameKind, type Channel, type GameKindValue, type GameSession } from '@dbb/shared';
+  import { GAMES, GameKind, type Channel, type GameKindValue, type GameSession } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { errorMessage, post } from '$lib/api';
   import Popover from '../Popover.svelte';

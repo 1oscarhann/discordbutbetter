@@ -1,10 +1,10 @@
-// Bundles the server (and @dbb/shared, which ships as TS source) into dist/.
+// Bundles the server (and @haunt/shared, which ships as TS source) into dist/.
 // Real npm deps stay external and are installed in the Docker image.
 import { build } from 'esbuild';
 import { readFileSync } from 'node:fs';
 
 const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8'));
-const external = Object.keys(pkg.dependencies).filter((d) => !d.startsWith('@dbb/'));
+const external = Object.keys(pkg.dependencies).filter((d) => !d.startsWith('@haunt/'));
 
 await build({
   entryPoints: { index: 'src/index.ts', cli: 'src/cli.ts' },

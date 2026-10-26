@@ -36,7 +36,7 @@ import {
   type WatchState,
   type WikiPage,
   type UserProfile,
-} from '@dbb/shared';
+} from '@haunt/shared';
 import { Gateway } from '../gateway';
 import { api, get, post } from '../api';
 import { applyTheme } from '../theme';

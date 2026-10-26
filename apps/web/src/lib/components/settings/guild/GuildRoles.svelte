@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Permissions as P, has, type Role } from '@dbb/shared';
+  import { Permissions as P, has, type Role } from '@haunt/shared';
   import { app, type GuildState } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { del, errorMessage, patch, post, put } from '$lib/api';

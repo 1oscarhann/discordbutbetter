@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ChannelType, Permissions as P, type LevelEntry, type LevelRole, type LevelSettings } from '@dbb/shared';
+  import { ChannelType, Permissions as P, type LevelEntry, type LevelRole, type LevelSettings } from '@haunt/shared';
   import { app, type GuildState } from '$lib/state/app.svelte';
   import { errorMessage, get, patch, put } from '$lib/api';
   import Avatar from '../../Avatar.svelte';

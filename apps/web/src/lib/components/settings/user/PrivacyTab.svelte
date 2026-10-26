@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { PrivacySettings, SelfUser } from '@dbb/shared';
+  import type { PrivacySettings, SelfUser } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { errorMessage, patch } from '$lib/api';
 

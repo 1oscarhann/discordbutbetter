@@ -43,7 +43,7 @@ pub fn run() {
 
             let opener = app.handle().clone();
             let window = WebviewWindowBuilder::new(app, "main", WebviewUrl::App("index.html".into()))
-                .title("Chat")
+                .title("Haunt")
                 .inner_size(1280.0, 820.0)
                 .min_inner_size(420.0, 520.0)
                 // Links with target=_blank open in the user's normal browser, never inside the app.

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Permissions as P } from '@dbb/shared';
+  import { Permissions as P } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { errorMessage, patch } from '$lib/api';

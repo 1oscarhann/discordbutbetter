@@ -1,5 +1,5 @@
 import { randomInt } from 'node:crypto';
-import { MessageType, XP_COOLDOWN_SECONDS, XP_PER_MESSAGE_MAX, XP_PER_MESSAGE_MIN, levelFromXp } from '@dbb/shared';
+import { MessageType, XP_COOLDOWN_SECONDS, XP_PER_MESSAGE_MAX, XP_PER_MESSAGE_MIN, levelFromXp } from '@haunt/shared';
 import type { Ctx } from '../context.js';
 import type { ChannelRow, GuildRow } from '../rows.js';
 import { loadMember } from '../lib/serialize.js';

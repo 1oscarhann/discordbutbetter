@@ -2,8 +2,8 @@ import { open, rm, stat } from 'node:fs/promises';
 import sharp, { type Metadata } from 'sharp';
 import { fileTypeFromFile } from 'file-type';
 import { parseFile } from 'music-metadata';
-import type { FilePurposeValue } from '@dbb/shared';
-import { Limits } from '@dbb/shared';
+import type { FilePurposeValue } from '@haunt/shared';
+import { Limits } from '@haunt/shared';
 import { badRequest } from '../errors.js';
 
 sharp.cache(false);

@@ -5,7 +5,7 @@ import {
   type ReadyPayload,
   type Relationship,
   type RelationshipTypeValue,
-} from '@dbb/shared';
+} from '@haunt/shared';
 import type { Ctx } from '../context.js';
 import type { ChannelRow, UserRow } from '../rows.js';
 import { buildFullGuild } from '../lib/guildstate.js';

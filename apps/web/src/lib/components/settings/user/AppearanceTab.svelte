@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { DARK_THEME, LIGHT_THEME, Limits, THEME_KEYS, THEME_KEY_LABELS, decodeTheme, encodeTheme, type ClientTheme, type ThemeKey } from '@dbb/shared';
+  import { DARK_THEME, LIGHT_THEME, Limits, THEME_KEYS, THEME_KEY_LABELS, decodeTheme, encodeTheme, type ClientTheme, type ThemeKey } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { applyTheme, themeFor } from '$lib/theme';
   import { copy } from '$lib/util/channel';

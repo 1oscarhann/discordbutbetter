@@ -1,4 +1,4 @@
-import { DARK_THEME, LIGHT_THEME, THEME_KEYS, type ClientSettings, type ClientTheme, type ProfileFont } from '@dbb/shared';
+import { DARK_THEME, LIGHT_THEME, THEME_KEYS, type ClientSettings, type ClientTheme, type ProfileFont } from '@haunt/shared';
 
 const CSS_VAR: Record<string, string> = {
   bg0: '--bg-0',

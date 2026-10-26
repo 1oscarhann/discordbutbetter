@@ -14,7 +14,7 @@ import {
   compareIds,
   has,
   isDmType,
-} from '@dbb/shared';
+} from '@haunt/shared';
 import type { ChannelRow, UserRow } from '../rows.js';
 import { idParam, parse, requireAuth, strParam } from '../lib/validate.js';
 import { limit, limitPreset, Limits as RL } from '../lib/ratelimit.js';

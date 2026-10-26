@@ -1,4 +1,4 @@
-import type { GatewayEventName, GatewayEvents } from '@dbb/shared';
+import type { GatewayEventName, GatewayEvents } from '@haunt/shared';
 import type { Redis } from '../redis.js';
 
 /**

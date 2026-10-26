@@ -1,6 +1,6 @@
 import { createHash, createHmac } from 'node:crypto';
 import { Parser } from 'htmlparser2';
-import { youtubeId, type Embed, isAllowedCoverUrl } from '@dbb/shared';
+import { youtubeId, type Embed, isAllowedCoverUrl } from '@haunt/shared';
 import type { Ctx } from '../context.js';
 import { safeFetch } from '../lib/safefetch.js';
 

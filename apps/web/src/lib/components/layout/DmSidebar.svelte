@@ -1,7 +1,7 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
-  import { ChannelType, RelationshipType, compareIds, type Channel } from '@dbb/shared';
+  import { ChannelType, RelationshipType, compareIds, type Channel } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { del } from '$lib/api';

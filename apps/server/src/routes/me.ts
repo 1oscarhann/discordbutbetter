@@ -12,7 +12,7 @@ import {
   PrivacyPatchSchema,
   StatusSchema,
   normaliseSettings,
-} from '@dbb/shared';
+} from '@haunt/shared';
 import type { UserRow } from '../rows.js';
 import { parse, requireAuth, idParam } from '../lib/validate.js';
 import { limitPreset } from '../lib/ratelimit.js';

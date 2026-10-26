@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import sharp from 'sharp';
-import { ChannelType, Permissions as P, MessageType } from '@dbb/shared';
+import { ChannelType, Permissions as P, MessageType } from '@haunt/shared';
 import { createTestApp, guildWith, register, type Client, type TestApp } from './helpers.js';
 import { FetchBlocked, isPublicAddress, safeFetch } from '../src/lib/safefetch.js';
 import { parseMeta } from '../src/services/embeds.js';

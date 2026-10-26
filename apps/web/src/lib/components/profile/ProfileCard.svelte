@@ -9,7 +9,7 @@
     type Channel,
     type GuestbookEntry,
     type UserProfile,
-  } from '@dbb/shared';
+  } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { api, del, errorMessage, get, post, put } from '$lib/api';

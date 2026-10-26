@@ -43,8 +43,8 @@ class VoiceClient {
   tiles = new SvelteMap<string, Tile>();
   volumes = new SvelteMap<string, number>();
   error = $state<string | null>(null);
-  inputDeviceId = $state<string | null>(readPref('dbb.voice.input'));
-  outputDeviceId = $state<string | null>(readPref('dbb.voice.output'));
+  inputDeviceId = $state<string | null>(readPref('haunt.voice.input'));
+  outputDeviceId = $state<string | null>(readPref('haunt.voice.output'));
   private room: Room | null = null;
   private audioEls = new Map<string, { identity: string; el: HTMLMediaElement }>();
 
@@ -223,8 +223,8 @@ class VoiceClient {
   async setDevices(input: string | null, output: string | null) {
     this.inputDeviceId = input;
     this.outputDeviceId = output;
-    writePref('dbb.voice.input', input);
-    writePref('dbb.voice.output', output);
+    writePref('haunt.voice.input', input);
+    writePref('haunt.voice.output', output);
     if (this.room) {
       if (input) await this.room.switchActiveDevice('audioinput', input).catch(() => {});
       if (output) await this.room.switchActiveDevice('audiooutput', output).catch(() => {});

@@ -1,10 +1,10 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { Permissions as P } from '@dbb/shared';
+  import { Permissions as P } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { api, errorMessage, get } from '$lib/api';
-  import type { Channel } from '@dbb/shared';
+  import type { Channel } from '@haunt/shared';
   import MessageList from '../chat/MessageList.svelte';
   import Composer from '../chat/Composer.svelte';
   import Icon from '../Icon.svelte';

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ChannelType, Limits, type AutomodAction, type AutomodRule } from '@dbb/shared';
+  import { ChannelType, Limits, type AutomodAction, type AutomodRule } from '@haunt/shared';
   import { app, type GuildState } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { del, errorMessage, get, patch, post } from '$lib/api';

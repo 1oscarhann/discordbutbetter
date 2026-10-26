@@ -15,8 +15,8 @@ import type {
   PlayingActivity,
   ListeningActivity,
   CustomStatus,
-} from '@dbb/shared';
-import { ChannelType } from '@dbb/shared';
+} from '@haunt/shared';
+import { ChannelType } from '@haunt/shared';
 import type { Db, Fragment } from '../db.js';
 import type { ChannelRow, GuildRow, OverwriteRow, RoleRow, UserRow } from '../rows.js';
 

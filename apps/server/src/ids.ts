@@ -1,5 +1,5 @@
 import { randomBytes, randomInt } from 'node:crypto';
-import { SNOWFLAKE_EPOCH } from '@dbb/shared';
+import { SNOWFLAKE_EPOCH } from '@haunt/shared';
 
 /**
  * 64-bit time-sortable ids: 42 bits ms since 2026-01-01, 10 bits worker, 12 bits sequence.

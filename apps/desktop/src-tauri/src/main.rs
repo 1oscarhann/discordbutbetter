@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    dbb_desktop_lib::run();
+    haunt_desktop_lib::run();
 }

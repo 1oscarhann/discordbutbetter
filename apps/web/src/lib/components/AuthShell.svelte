@@ -2,7 +2,7 @@
   import type { Snippet } from 'svelte';
   import { onMount } from 'svelte';
   import { get } from '$lib/api';
-  import type { InstanceInfo } from '@dbb/shared';
+  import type { InstanceInfo } from '@haunt/shared';
 
   let { title, children }: { title: string; children: Snippet } = $props();
   let name = $state('');

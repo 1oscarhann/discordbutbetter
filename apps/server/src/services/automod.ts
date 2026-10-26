@@ -1,4 +1,4 @@
-import { AuditAction, MessageType, Permissions as P, hasAny, type AutomodAction, type AutomodRule } from '@dbb/shared';
+import { AuditAction, MessageType, Permissions as P, hasAny, type AutomodAction, type AutomodRule } from '@haunt/shared';
 import type { Ctx } from '../context.js';
 import { audit } from '../lib/audit.js';
 import { loadMember } from '../lib/serialize.js';

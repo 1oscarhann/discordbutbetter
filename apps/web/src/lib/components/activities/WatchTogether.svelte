@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Channel, WatchState } from '@dbb/shared';
+  import type { Channel, WatchState } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { errorMessage, post } from '$lib/api';
   import { duration } from '$lib/util/time';

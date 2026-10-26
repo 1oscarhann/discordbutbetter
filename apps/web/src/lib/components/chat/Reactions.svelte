@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Channel, Message, PublicUser } from '@dbb/shared';
+  import type { Channel, Message, PublicUser } from '@haunt/shared';
   import { get } from '$lib/api';
   import { app } from '$lib/state/app.svelte';
 

@@ -1,17 +1,17 @@
 # Full stack: app + Postgres + Valkey + LiveKit (voice/video) + Caddy (HTTPS).
 #   cp .env.example .env   # then fill it in
 #   docker compose up -d
-name: chat
+name: haunt
 
 services:
   app:
     build: .
-    image: dbb-app:local
+    image: haunt:local
     restart: unless-stopped
     init: true
     env_file: .env
     environment:
-      DATABASE_URL: postgres://dbb:${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}@postgres:5432/dbb
+      DATABASE_URL: postgres://haunt:${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}@postgres:5432/haunt
       REDIS_URL: redis://valkey:6379
       PUBLIC_URL: ${PUBLIC_URL:-https://${DOMAIN:?set DOMAIN in .env}}
       LIVEKIT_URL: ${LIVEKIT_URL:-wss://${DOMAIN}/livekit}
@@ -31,13 +31,13 @@ services:
     image: postgres:17-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_USER: dbb
-      POSTGRES_DB: dbb
+      POSTGRES_USER: haunt
+      POSTGRES_DB: haunt
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - postgres:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U dbb -d dbb"]
+      test: ["CMD-SHELL", "pg_isready -U haunt -d haunt"]
       interval: 5s
       timeout: 5s
       retries: 20

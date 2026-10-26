@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Track } from 'livekit-client';
-  import { Permissions as P, type Channel, type GameSession } from '@dbb/shared';
+  import { Permissions as P, type Channel, type GameSession } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { voice } from '$lib/state/voice.svelte';
@@ -29,7 +29,7 @@
   // load watch state + running games when opening the channel
   $effect(() => {
     const id = channel.id;
-    void get<import('@dbb/shared').WatchState | null>(`/channels/${id}/watch`).then((w) => w?.videoId && app.watch.set(id, w)).catch(() => {});
+    void get<import('@haunt/shared').WatchState | null>(`/channels/${id}/watch`).then((w) => w?.videoId && app.watch.set(id, w)).catch(() => {});
     void get<GameSession[]>(`/channels/${id}/games`).then((list) => list.forEach((s) => app.games.set(s.id, s))).catch(() => {});
   });
 
@@ -213,9 +213,14 @@
   .grid {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    grid-auto-rows: minmax(150px, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 360px));
+    justify-content: center;
+    align-content: center;
     gap: 10px;
+    overflow: auto;
+  }
+  .grid:not(.strip) .tile {
+    aspect-ratio: 16 / 9;
   }
   .grid.strip {
     flex: none;

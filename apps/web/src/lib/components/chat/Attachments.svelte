@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { formatBytes, type Attachment } from '@dbb/shared';
+  import { formatBytes, type Attachment } from '@haunt/shared';
   import { ui } from '$lib/state/ui.svelte';
   import Icon from '../Icon.svelte';
 

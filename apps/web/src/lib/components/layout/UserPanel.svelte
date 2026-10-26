@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { Status, type StatusValue } from '@dbb/shared';
+  import { Status, type StatusValue } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { voice } from '$lib/state/voice.svelte';

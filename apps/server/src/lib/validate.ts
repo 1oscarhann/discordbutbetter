@@ -2,7 +2,7 @@ import type { z } from 'zod';
 import type { FastifyRequest } from 'fastify';
 import { badRequest, unauthorized } from '../errors.js';
 import type { Auth } from '../context.js';
-import { zId } from '@dbb/shared';
+import { zId } from '@haunt/shared';
 
 /** Parse with a zod schema or throw a 400 listing what's wrong. */
 export function parse<S extends z.ZodType>(schema: S, data: unknown): z.output<S> {

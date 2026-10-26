@@ -4,7 +4,7 @@
   import AuthShell from '$lib/components/AuthShell.svelte';
   import Avatar from '$lib/components/Avatar.svelte';
   import { ApiError, errorMessage, get, post } from '$lib/api';
-  import type { Invite } from '@dbb/shared';
+  import type { Invite } from '@haunt/shared';
 
   let invite = $state<Invite | null>(null);
   let error = $state('');

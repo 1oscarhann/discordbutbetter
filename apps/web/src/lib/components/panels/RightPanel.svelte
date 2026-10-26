@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Channel } from '@dbb/shared';
+  import type { Channel } from '@haunt/shared';
   import { ui, type RightPanel } from '$lib/state/ui.svelte';
   import MemberList from './MemberList.svelte';
   import PinsPanel from './PinsPanel.svelte';

@@ -10,7 +10,7 @@ const EnvSchema = z.object({
   HOST: z.string().default('0.0.0.0'),
   PORT: z.coerce.number().int().default(3000),
   PUBLIC_URL: z.url().default('http://localhost:5173'),
-  APP_NAME: z.string().min(1).max(40).default('discordbutbetter'),
+  APP_NAME: z.string().min(1).max(40).default('Haunt'),
   LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent']).optional(),
   /**
    * How many reverse proxies sit in front of the app. "true" means one (e.g. Caddy). We never trust
@@ -29,7 +29,7 @@ const EnvSchema = z.object({
       return Number(l);
     }),
 
-  DATABASE_URL: z.string().default('postgres://dbb:dbb@localhost:5432/dbb'),
+  DATABASE_URL: z.string().default('postgres://haunt:haunt@localhost:5432/haunt'),
   REDIS_URL: z.string().default('redis://localhost:6379'),
   SECRET: z.string().optional(),
 

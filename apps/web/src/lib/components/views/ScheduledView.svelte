@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { MessageFlags, type ScheduledMessage } from '@dbb/shared';
+  import { MessageFlags, type ScheduledMessage } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { del, errorMessage, patch } from '$lib/api';

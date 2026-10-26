@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Ban } from '@dbb/shared';
+  import type { Ban } from '@haunt/shared';
   import { app, type GuildState } from '$lib/state/app.svelte';
   import { del, errorMessage, get } from '$lib/api';
   import { fullDate } from '$lib/util/time';

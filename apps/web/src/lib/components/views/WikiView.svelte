@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Limits, Permissions as P, type Channel, type WikiPage, type WikiRevision } from '@dbb/shared';
+  import { Limits, Permissions as P, type Channel, type WikiPage, type WikiRevision } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { api, del, errorMessage, get, post } from '$lib/api';

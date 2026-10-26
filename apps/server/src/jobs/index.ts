@@ -1,4 +1,4 @@
-import { ChannelType, SNOWFLAKE_EPOCH, isDmType, type VoiceState } from '@dbb/shared';
+import { ChannelType, SNOWFLAKE_EPOCH, isDmType, type VoiceState } from '@haunt/shared';
 import type { Ctx } from '../context.js';
 import { tryLock } from '../redis.js';
 import { HttpError } from '../errors.js';

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { AuditAction, type AuditLogEntry, type PublicUser } from '@dbb/shared';
+  import { AuditAction, type AuditLogEntry, type PublicUser } from '@haunt/shared';
   import { app, type GuildState } from '$lib/state/app.svelte';
   import { errorMessage, get } from '$lib/api';
   import { timeAgo, fullDate } from '$lib/util/time';

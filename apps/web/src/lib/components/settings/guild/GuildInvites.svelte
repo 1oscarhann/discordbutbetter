@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Invite } from '@dbb/shared';
+  import type { Invite } from '@haunt/shared';
   import { app, type GuildState } from '$lib/state/app.svelte';
   import { del, errorMessage, get } from '$lib/api';
   import { timeUntil } from '$lib/util/time';

@@ -1,4 +1,4 @@
-import type { FilePurposeValue } from '@dbb/shared';
+import type { FilePurposeValue } from '@haunt/shared';
 
 export class ApiError extends Error {
   constructor(

@@ -1,5 +1,5 @@
 import type { FastifyInstance } from 'fastify';
-import { ChannelType, Permissions as P, SearchQuerySchema, has, type SearchResult } from '@dbb/shared';
+import { ChannelType, Permissions as P, SearchQuerySchema, has, type SearchResult } from '@haunt/shared';
 import { idParam, parse, requireAuth } from '../lib/validate.js';
 import { limitPreset } from '../lib/ratelimit.js';
 import { guildAccess, channelPermissionsOf, loadOverwrites } from '../lib/perms.js';

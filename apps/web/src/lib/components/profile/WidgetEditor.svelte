@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Limits, proxiedImage, type ProfileWidget } from '@dbb/shared';
+  import { Limits, proxiedImage, type ProfileWidget } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { errorMessage, upload } from '$lib/api';
   import Icon, { type IconName } from '../Icon.svelte';

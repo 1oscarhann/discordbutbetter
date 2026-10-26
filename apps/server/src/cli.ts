@@ -1,6 +1,6 @@
 /**
  * Admin CLI. In Docker:  docker compose exec app node dist/cli.js <command>
- * Locally:               pnpm --filter @dbb/server cli <command>
+ * Locally:               pnpm --filter @haunt/server cli <command>
  */
 import { loadConfig } from './config.js';
 import { createDb, migrate } from './db.js';

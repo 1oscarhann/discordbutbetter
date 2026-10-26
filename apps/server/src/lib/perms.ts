@@ -6,7 +6,7 @@ import {
   highestPosition,
   isDmType,
   type PermOverwrite,
-} from '@dbb/shared';
+} from '@haunt/shared';
 import type { Db } from '../db.js';
 import type { Ctx } from '../context.js';
 import type { ChannelRow, GuildRow, OverwriteRow, RoleRow } from '../rows.js';

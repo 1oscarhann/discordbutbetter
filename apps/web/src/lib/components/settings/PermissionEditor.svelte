@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { PERMISSION_INFO, Permissions as P, type PermissionName } from '@dbb/shared';
+  import { PERMISSION_INFO, Permissions as P, type PermissionName } from '@haunt/shared';
 
   /**
    * role mode: a toggle per permission (allow bits).

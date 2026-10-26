@@ -1,4 +1,4 @@
-import type { Presence, VisibleStatus, PlayingActivity, ListeningActivity } from '@dbb/shared';
+import type { Presence, VisibleStatus, PlayingActivity, ListeningActivity } from '@haunt/shared';
 import type { Ctx } from '../context.js';
 import type { UserRow } from '../rows.js';
 import { customStatusOf } from './serialize.js';

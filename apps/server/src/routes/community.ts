@@ -18,7 +18,7 @@ import {
   levelFromXp,
   type AutomodRule,
   type WikiPage,
-} from '@dbb/shared';
+} from '@haunt/shared';
 import type { GuildRow, UserRow } from '../rows.js';
 import { idParam, parse, requireAuth } from '../lib/validate.js';
 import { limitPreset } from '../lib/ratelimit.js';

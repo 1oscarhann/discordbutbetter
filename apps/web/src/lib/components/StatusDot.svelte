@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { VisibleStatus } from '@dbb/shared';
+  import type { VisibleStatus } from '@haunt/shared';
   let { status, size = 10 }: { status: VisibleStatus | 'invisible'; size?: number } = $props();
   const color = $derived(
     status === 'online' ? 'var(--success)' : status === 'idle' ? 'var(--warning)' : status === 'dnd' ? 'var(--danger)' : 'var(--text-faint)',

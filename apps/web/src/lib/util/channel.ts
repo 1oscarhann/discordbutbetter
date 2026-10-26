@@ -1,4 +1,4 @@
-import { ChannelType, type Channel } from '@dbb/shared';
+import { ChannelType, type Channel } from '@haunt/shared';
 import { app } from '$lib/state/app.svelte';
 
 export function channelTitle(c: Channel | null): string {

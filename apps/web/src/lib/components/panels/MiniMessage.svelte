@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Message } from '@dbb/shared';
+  import type { Message } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { messageTime } from '$lib/util/time';
   import Avatar from '../Avatar.svelte';

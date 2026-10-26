@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { parseMarkdown, isEmojiOnly, type MdNode } from '@dbb/shared';
+  import { parseMarkdown, isEmojiOnly, type MdNode } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { formatTimestamp, fullDate } from '$lib/util/time';

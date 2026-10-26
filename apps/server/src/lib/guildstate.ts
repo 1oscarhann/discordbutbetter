@@ -1,4 +1,4 @@
-import { ChannelType, type FullGuild, type VoiceState } from '@dbb/shared';
+import { ChannelType, type FullGuild, type VoiceState } from '@haunt/shared';
 import type { Ctx } from '../context.js';
 import type { ChannelRow, GuildRow, OverwriteRow, RoleRow } from '../rows.js';
 import { guild as serGuild, role as serRole, channel as serChannel, loadMembers, loadEmojis, loadStickers } from './serialize.js';

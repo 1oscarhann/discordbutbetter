@@ -18,7 +18,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { app } from '$lib/state/app.svelte';
-  import { Permissions as P, type CustomEmoji } from '@dbb/shared';
+  import { Permissions as P, type CustomEmoji } from '@haunt/shared';
 
   let { guildId = null, onpick }: { guildId?: string | null; onpick: (e: PickedEmoji) => void } = $props();
 

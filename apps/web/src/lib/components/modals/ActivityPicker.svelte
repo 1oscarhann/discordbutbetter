@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { proxiedImage } from '@dbb/shared';
+  import { proxiedImage } from '@haunt/shared';
   import { ui } from '$lib/state/ui.svelte';
   import { app } from '$lib/state/app.svelte';
   import { del, errorMessage, get, put, type UploadedFile } from '$lib/api';

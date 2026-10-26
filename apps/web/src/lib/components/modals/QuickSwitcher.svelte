@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { ChannelType, compareIds, isDmType } from '@dbb/shared';
+  import { ChannelType, compareIds, isDmType } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { channelHref, channelTitle } from '$lib/util/channel';

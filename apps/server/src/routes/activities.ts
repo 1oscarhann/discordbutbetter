@@ -17,7 +17,7 @@ import {
   type GameState,
   type WatchState,
   type AnagramData,
-} from '@dbb/shared';
+} from '@haunt/shared';
 import type { UserRow } from '../rows.js';
 import { idParam, parse, requireAuth } from '../lib/validate.js';
 import { limitPreset } from '../lib/ratelimit.js';

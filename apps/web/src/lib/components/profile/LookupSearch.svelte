@@ -9,7 +9,7 @@
 </script>
 
 <script lang="ts">
-  import { proxiedImage } from '@dbb/shared';
+  import { proxiedImage } from '@haunt/shared';
   import { errorMessage, get } from '$lib/api';
   import Icon from '../Icon.svelte';
 

@@ -10,7 +10,7 @@ import {
   missingForGrant,
   parsePermissions,
   permissionNames,
-} from '@dbb/shared';
+} from '@haunt/shared';
 import type { RoleRow } from '../rows.js';
 import { idParam, parse, requireAuth } from '../lib/validate.js';
 import { limitPreset } from '../lib/ratelimit.js';

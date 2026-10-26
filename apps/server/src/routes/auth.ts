@@ -5,7 +5,7 @@ import {
   RegisterSchema,
   ResetPasswordSchema,
   TokenSchema,
-} from '@dbb/shared';
+} from '@haunt/shared';
 import type { UserRow } from '../rows.js';
 import { parse, requireAuth } from '../lib/validate.js';
 import { hit, limit, limitPreset, Limits } from '../lib/ratelimit.js';

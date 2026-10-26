@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { RelationshipType, proxiedImage, type Channel, type Relationship } from '@dbb/shared';
+  import { RelationshipType, proxiedImage, type Channel, type Relationship } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { del, errorMessage, post, put } from '$lib/api';

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ProfileSong } from '@dbb/shared';
+  import type { ProfileSong } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import Icon from '../Icon.svelte';
 

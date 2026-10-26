@@ -1,4 +1,4 @@
-# Architecture
+# Haunt — Architecture
 
 ## Overview
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { MessageEdit, Message } from '@dbb/shared';
+  import type { MessageEdit, Message } from '@haunt/shared';
   import { ui } from '$lib/state/ui.svelte';
   import { app } from '$lib/state/app.svelte';
   import { get } from '$lib/api';

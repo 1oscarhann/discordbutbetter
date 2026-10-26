@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import sharp from 'sharp';
-import { ChannelType, MessageFlags } from '@dbb/shared';
+import { ChannelType, MessageFlags } from '@haunt/shared';
 import { createTestApp, guildWith, register, sleep, type Client, type TestApp } from './helpers.js';
 import { JOBS } from '../src/jobs/index.js';
 
@@ -29,7 +29,7 @@ async function resetLimits() {
 beforeEach(resetLimits);
 
 async function upload(cl: Client, purpose: string, buf: Buffer, filename: string) {
-  const boundary = '----dbbtest' + Math.random().toString(16).slice(2);
+  const boundary = '----haunttest' + Math.random().toString(16).slice(2);
   const body = Buffer.concat([
     Buffer.from(`--${boundary}\r\nContent-Disposition: form-data; name="file"; filename="${filename}"\r\nContent-Type: application/octet-stream\r\n\r\n`),
     buf,

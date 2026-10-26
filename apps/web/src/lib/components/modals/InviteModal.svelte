@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Invite } from '@dbb/shared';
+  import type { Invite } from '@haunt/shared';
   import { ui } from '$lib/state/ui.svelte';
   import { app } from '$lib/state/app.svelte';
   import { errorMessage, post } from '$lib/api';

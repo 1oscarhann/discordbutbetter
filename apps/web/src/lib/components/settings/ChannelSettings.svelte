@@ -10,7 +10,7 @@
     isDmType,
     type Channel,
     type Overwrite,
-  } from '@dbb/shared';
+  } from '@haunt/shared';
   import { app } from '$lib/state/app.svelte';
   import { ui } from '$lib/state/ui.svelte';
   import { api, del, errorMessage, patch, post, put, type UploadedFile } from '$lib/api';
