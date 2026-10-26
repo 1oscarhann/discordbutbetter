@@ -26,9 +26,13 @@
     busy = true;
     error = '';
     try {
-      const c = await post<Channel>(`/guilds/${guildId}/channels`, { name, type, parentId: isCategory ? null : parentId, private: isPrivate });
+      // read props before closing: they come from ui.createChannel and go away with it
+      const gid = guildId;
+      const c = await post<Channel>(`/guilds/${gid}/channels`, { name, type, parentId: isCategory ? null : parentId, private: isPrivate });
+      // don't wait for the gateway echo, or the page briefly can't find the channel
+      app.guilds.get(gid)?.channels.set(c.id, c);
       ui.createChannel = null;
-      if (c.type !== ChannelType.CATEGORY) goto(`/app/${guildId}/${c.id}`);
+      if (c.type !== ChannelType.CATEGORY) goto(`/app/${gid}/${c.id}`);
     } catch (err) {
       error = errorMessage(err);
     } finally {
@@ -37,7 +41,7 @@
   }
 </script>
 
-<Modal title={isCategory ? 'Create category' : 'Create channel'} onclose={() => (ui.createChannel = null)}>
+<Modal title={isCategory ? 'Create category' : 'Create channel'} onclose={() => { ui.createChannel = null; }}>
   <form id="cc" onsubmit={create}>
     {#if !isCategory}
       {#if parentId}<p class="faint small">In {app.channel(parentId)?.name}</p>{/if}
@@ -63,7 +67,7 @@
     {#if error}<p class="error-text">{error}</p>{/if}
   </form>
   {#snippet footer()}
-    <button class="btn ghost" onclick={() => (ui.createChannel = null)}>Cancel</button>
+    <button class="btn ghost" onclick={() => { ui.createChannel = null; }}>Cancel</button>
     <button class="btn primary" form="cc" disabled={busy || !name.trim()}>Create</button>
   {/snippet}
 </Modal>

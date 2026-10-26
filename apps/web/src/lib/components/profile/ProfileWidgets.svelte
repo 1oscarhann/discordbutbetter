@@ -35,7 +35,7 @@
     {:else if w.type === 'photos'}
       <div class="photos">
         {#each w.items as p, i (i)}
-          <button class="photo" onclick={() => (ui.lightbox = { src: p.url, alt: p.caption ?? '' })} title={p.caption ?? ''}>
+          <button class="photo" onclick={() => { ui.lightbox = { src: p.url, alt: p.caption ?? '' }; }} title={p.caption ?? ''}>
             <img src={p.url} alt={p.caption ?? ''} loading="lazy" />
           </button>
         {/each}

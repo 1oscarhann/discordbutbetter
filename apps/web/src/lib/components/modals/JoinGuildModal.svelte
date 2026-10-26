@@ -30,7 +30,7 @@
   }
 </script>
 
-<Modal title="Join a server" onclose={() => (ui.joinGuild = false)}>
+<Modal title="Join a server" onclose={() => { ui.joinGuild = false; }}>
   <form id="jg" onsubmit={join}>
     <div class="field">
       <label for="inv">Invite link or code</label>
@@ -39,7 +39,7 @@
     {#if error}<p class="error-text">{error}</p>{/if}
   </form>
   {#snippet footer()}
-    <button class="btn ghost" onclick={() => (ui.joinGuild = false)}>Cancel</button>
+    <button class="btn ghost" onclick={() => { ui.joinGuild = false; }}>Cancel</button>
     <button class="btn primary" form="jg" disabled={busy || !link.trim()}>Join</button>
   {/snippet}
 </Modal>

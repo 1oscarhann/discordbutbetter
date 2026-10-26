@@ -138,10 +138,10 @@
       </button>
       {#if mentions}<span class="badge">{mentions}</span>{/if}
       {#if c.type !== ChannelType.VOICE && app.can(P.CREATE_INVITE, guildId, c.id)}
-        <button class="icon-btn mini hov" title="Invite" onclick={() => (ui.invite = c.id)}><Icon name="user-plus" size={15} /></button>
+        <button class="icon-btn mini hov" title="Invite" onclick={() => { ui.invite = c.id; }}><Icon name="user-plus" size={15} /></button>
       {/if}
       {#if canManage}
-        <button class="icon-btn mini hov" title="Edit channel" onclick={() => (ui.channelSettings = c.id)}><Icon name="settings" size={15} /></button>
+        <button class="icon-btn mini hov" title="Edit channel" onclick={() => { ui.channelSettings = c.id; }}><Icon name="settings" size={15} /></button>
       {/if}
     </div>
     {#if c.type === ChannelType.VOICE}
@@ -186,7 +186,7 @@
         <span class="truncate">{cat.name}</span>
       </button>
       {#if canManage}
-        <button class="icon-btn mini hov2" title="Create channel" onclick={() => (ui.createChannel = { guildId, parentId: cat.id, type: ChannelType.TEXT })}>
+        <button class="icon-btn mini hov2" title="Create channel" onclick={() => { ui.createChannel = { guildId, parentId: cat.id, type: ChannelType.TEXT }; }}>
           <Icon name="plus" size={15} />
         </button>
       {/if}
@@ -202,20 +202,20 @@
   <Popover anchor={headerEl} onclose={() => (headerOpen = false)}>
     <div class="menu" style="width:220px">
       {#if inviteChannel() && app.can(P.CREATE_INVITE, guildId)}
-        <button class="menu-item" onclick={() => ((ui.invite = inviteChannel()), (headerOpen = false))}><Icon name="user-plus" size={16} /> Invite people</button>
+        <button class="menu-item" onclick={() => { ui.invite = inviteChannel(); headerOpen = false; }}><Icon name="user-plus" size={16} /> Invite people</button>
       {/if}
       {#if anySettings}
-        <button class="menu-item" onclick={() => ((ui.guildSettings = { guildId, tab: 'overview' }), (headerOpen = false))}><Icon name="settings" size={16} /> Server settings</button>
+        <button class="menu-item" onclick={() => { ui.guildSettings = { guildId, tab: 'overview' }; headerOpen = false; }}><Icon name="settings" size={16} /> Server settings</button>
       {/if}
       {#if canManage}
-        <button class="menu-item" onclick={() => ((ui.createChannel = { guildId, parentId: null, type: ChannelType.TEXT }), (headerOpen = false))}><Icon name="plus" size={16} /> Create channel</button>
-        <button class="menu-item" onclick={() => ((ui.createChannel = { guildId, parentId: null, type: ChannelType.CATEGORY }), (headerOpen = false))}><Icon name="menu" size={16} /> Create category</button>
+        <button class="menu-item" onclick={() => { ui.createChannel = { guildId, parentId: null, type: ChannelType.TEXT }; headerOpen = false; }}><Icon name="plus" size={16} /> Create channel</button>
+        <button class="menu-item" onclick={() => { ui.createChannel = { guildId, parentId: null, type: ChannelType.CATEGORY }; headerOpen = false; }}><Icon name="menu" size={16} /> Create category</button>
       {/if}
       {#if g.guild.levels.enabled}
-        <button class="menu-item" onclick={() => ((ui.guildSettings = { guildId, tab: 'leaderboard' }), (headerOpen = false))}><Icon name="trophy" size={16} /> Leaderboard</button>
+        <button class="menu-item" onclick={() => { ui.guildSettings = { guildId, tab: 'leaderboard' }; headerOpen = false; }}><Icon name="trophy" size={16} /> Leaderboard</button>
       {/if}
-      <button class="menu-item" onclick={() => ((ui.guildSettings = { guildId, tab: 'notifications' }), (headerOpen = false))}><Icon name="bell" size={16} /> Notification settings</button>
-      <button class="menu-item" onclick={() => ((ui.settings = `server-profile:${guildId}`), (headerOpen = false))}><Icon name="edit" size={16} /> Edit server profile</button>
+      <button class="menu-item" onclick={() => { ui.guildSettings = { guildId, tab: 'notifications' }; headerOpen = false; }}><Icon name="bell" size={16} /> Notification settings</button>
+      <button class="menu-item" onclick={() => { ui.settings = `server-profile:${guildId}`; headerOpen = false; }}><Icon name="edit" size={16} /> Edit server profile</button>
       {#if !isOwner}
         <div class="menu-sep"></div>
         <button
@@ -247,7 +247,7 @@
       </button>
       {#if canManage}
         <div class="menu-sep"></div>
-        <button class="menu-item" onclick={() => ((ui.channelSettings = c.id), (channelMenu = null))}><Icon name="settings" size={16} /> Edit channel</button>
+        <button class="menu-item" onclick={() => { ui.channelSettings = c.id; channelMenu = null; }}><Icon name="settings" size={16} /> Edit channel</button>
         <button class="menu-item danger" onclick={() => deleteChannel(c)}><Icon name="trash" size={16} /> Delete channel</button>
       {/if}
     </div>

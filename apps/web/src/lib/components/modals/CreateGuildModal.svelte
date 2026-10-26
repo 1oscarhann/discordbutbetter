@@ -18,6 +18,8 @@
     error = '';
     try {
       const g = await post<FullGuild>('/guilds', { name, iconFileId: icon?.id ?? null });
+      // use the response right away instead of waiting for the gateway's GUILD_CREATE
+      app.handle('GUILD_CREATE', g);
       ui.createGuild = false;
       goto(`/app/${g.id}`);
     } catch (err) {
@@ -28,7 +30,7 @@
   }
 </script>
 
-<Modal title="Create a server" onclose={() => (ui.createGuild = false)}>
+<Modal title="Create a server" onclose={() => { ui.createGuild = false; }}>
   <form id="cg" onsubmit={create}>
     <p class="muted">Your server is where you and your friends hang out. Everything is free — big uploads, custom emoji, HD streams.</p>
     <div class="field"><ImagePicker purpose="guild_icon" label="Upload icon" round onchange={(f) => (icon = f)} /></div>
@@ -39,7 +41,7 @@
     {#if error}<p class="error-text">{error}</p>{/if}
   </form>
   {#snippet footer()}
-    <button class="btn ghost" onclick={() => (ui.createGuild = false)}>Cancel</button>
+    <button class="btn ghost" onclick={() => { ui.createGuild = false; }}>Cancel</button>
     <button class="btn primary" form="cg" disabled={busy || name.trim().length < 2}>Create</button>
   {/snippet}
 </Modal>

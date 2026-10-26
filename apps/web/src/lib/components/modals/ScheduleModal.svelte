@@ -42,7 +42,7 @@
   }
 </script>
 
-<Modal title="Send later" onclose={() => (ui.scheduleFor = null)}>
+<Modal title="Send later" onclose={() => { ui.scheduleFor = null; }}>
   <p class="faint small">To {channel?.guildId ? `#${channel.name}` : channelTitle(channel)}</p>
   <div class="field"><textarea class="textarea" bind:value={content} rows="4" placeholder="Message"></textarea></div>
   <div class="row presets">
@@ -57,7 +57,7 @@
   <label class="row"><input type="checkbox" bind:checked={silent} /> Send silently (no pings)</label>
   {#if error}<p class="error-text">{error}</p>{/if}
   {#snippet footer()}
-    <button class="btn ghost" onclick={() => (ui.scheduleFor = null)}>Cancel</button>
+    <button class="btn ghost" onclick={() => { ui.scheduleFor = null; }}>Cancel</button>
     <button class="btn primary" disabled={busy || !content.trim()} onclick={schedule}>Schedule</button>
   {/snippet}
 </Modal>

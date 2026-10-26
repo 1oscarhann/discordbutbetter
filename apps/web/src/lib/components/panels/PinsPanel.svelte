@@ -24,7 +24,7 @@
     <p class="faint empty">Nothing pinned here yet. Pin important messages from their ⋯ menu.</p>
   {:else}
     {#each pins as m (m.id)}
-      <MiniMessage message={m} onclick={() => (ui.jumpTo = { channelId: channel.id, messageId: m.id })} />
+      <MiniMessage message={m} onclick={() => { ui.jumpTo = { channelId: channel.id, messageId: m.id }; }} />
     {/each}
   {/if}
 </div>

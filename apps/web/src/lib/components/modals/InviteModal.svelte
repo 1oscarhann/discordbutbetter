@@ -31,7 +31,7 @@
   const url = $derived(invite ? `${location.origin}/invite/${invite.code}` : '');
 </script>
 
-<Modal title="Invite friends to {channel?.guildId ? app.guilds.get(channel.guildId)?.guild.name : ''}" onclose={() => (ui.invite = null)}>
+<Modal title="Invite friends to {channel?.guildId ? app.guilds.get(channel.guildId)?.guild.name : ''}" onclose={() => { ui.invite = null; }}>
   <div class="field">
     <label for="iurl">Invite link</label>
     <div class="row">

@@ -60,7 +60,7 @@
     <span class="faint">@{me.username} · joined {fullDate(me.createdAt)}</span>
     {#if me.isAdmin}<span class="pill" style="align-self:flex-start">Instance admin</span>{/if}
   </div>
-  <button class="btn primary" onclick={() => (ui.settings = 'profile')}>Edit profile</button>
+  <button class="btn primary" onclick={() => { ui.settings = 'profile'; }}>Edit profile</button>
 </div>
 
 <div class="rows card">

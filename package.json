@@ -11,9 +11,11 @@
     "build": "pnpm --filter @haunt/shared build && pnpm --filter @haunt/web build && pnpm --filter @haunt/server build",
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
-    "format": "prettier -w ."
+    "format": "prettier -w .",
+    "e2e": "node e2e/smoke.cjs && node e2e/flows.cjs"
   },
   "devDependencies": {
+    "playwright": "1.63.0",
     "prettier": "3.9.10",
     "prettier-plugin-svelte": "3.5.2",
     "typescript": "5.9.3"

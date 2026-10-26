@@ -16,7 +16,7 @@
   });
 </script>
 
-<Modal title="Edit history" onclose={() => (ui.editHistory = null)} width={560}>
+<Modal title="Edit history" onclose={() => { ui.editHistory = null; }} width={560}>
   {#if msg}
     <div class="ver current">
       <div class="faint small">Current · edited {msg.editedAt ? fullDate(msg.editedAt) : ''}</div>

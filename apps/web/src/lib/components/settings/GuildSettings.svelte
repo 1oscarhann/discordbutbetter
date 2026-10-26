@@ -66,7 +66,7 @@
 </script>
 
 {#if g}
-  <SettingsShell {sections} bind:tab onclose={() => (ui.guildSettings = null)}>
+  <SettingsShell {sections} bind:tab onclose={() => { ui.guildSettings = null; }}>
     {#key tab}
       {#if tab === 'overview'}
         <GuildOverview {g} />

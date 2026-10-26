@@ -106,7 +106,7 @@
 <div class="members">
   {#each list.slice(0, shown) as m (m.user.id)}
     <div class="list-item">
-      <button class="who" onclick={(e) => (ui.profile = { userId: m.user.id, guildId: gid, x: e.clientX, y: e.clientY })}>
+      <button class="who" onclick={(e) => { ui.profile = { userId: m.user.id, guildId: gid, x: e.clientX, y: e.clientY }; }}>
         <Avatar src={app.avatarOf(m.user.id, gid)} name={app.displayName(m.user.id, gid)} size={32} />
         <span class="col" style="gap:0;min-width:0">
           <strong class="truncate" style="color:{app.roleColor(gid, m.user.id) ?? 'inherit'}">
@@ -138,7 +138,7 @@
   {@const actOk = canActOn(m)}
   <Popover anchor={menu.anchor} placement="bottom-end" onclose={() => (menu = null)}>
     <div class="menu">
-      <button class="menu-item" onclick={() => ((ui.profile = { userId: m.user.id, guildId: gid }), (menu = null))}><Icon name="user-plus" size={15} /> Profile</button>
+      <button class="menu-item" onclick={() => { ui.profile = { userId: m.user.id, guildId: gid }; menu = null; }}><Icon name="user-plus" size={15} /> Profile</button>
       {#if can(P.MANAGE_NICKNAMES) && (actOk || m.user.id === app.me?.id)}<button class="menu-item" onclick={() => open('nick', m)}><Icon name="edit" size={15} /> Change nickname</button>{/if}
       {#if can(P.MANAGE_ROLES)}<button class="menu-item" onclick={() => open('roles', m)}><Icon name="shield" size={15} /> Roles</button>{/if}
       {#if actOk && (can(P.MODERATE_MEMBERS) || can(P.KICK_MEMBERS) || can(P.BAN_MEMBERS))}<div class="menu-sep"></div>{/if}

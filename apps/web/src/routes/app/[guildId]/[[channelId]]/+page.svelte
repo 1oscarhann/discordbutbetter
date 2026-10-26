@@ -14,11 +14,19 @@
   const channel = $derived(channelId ? app.channel(channelId) : null);
 
   // no channel in the url: go to the last one you used, or the first text channel
+  // A server you just created or joined can reach us over the gateway a moment after we navigate
+  // here, so give it a few seconds before deciding it doesn't exist.
   $effect(() => {
-    if (!g) {
-      if (app.status === 'ready') goto('/app/me', { replaceState: true });
-      return;
-    }
+    if (g || app.status !== 'ready') return;
+    const id = guildId;
+    const t = setTimeout(() => {
+      if (!app.guilds.has(id) && page.params.guildId === id) goto('/app/me', { replaceState: true });
+    }, 5000);
+    return () => clearTimeout(t);
+  });
+
+  $effect(() => {
+    if (!g) return;
     if (channelId) return;
     let last: string | null = null;
     try {
@@ -37,6 +45,12 @@
     if (target) goto(`/app/${guildId}/${target}`, { replaceState: true });
   });
 
+  // on narrow screens panels sit on top of the chat: close them when you switch channels
+  $effect(() => {
+    void channelId;
+    if (window.innerWidth <= 1100) ui.rightPanel = null;
+  });
+
   $effect(() => {
     if (!channelId) return;
     try {
@@ -50,7 +64,7 @@
 </script>
 
 {#if !g}
-  <div class="empty"></div>
+  <div class="empty"><p class="faint">Loading…</p></div>
 {:else if !channelId}
   <div class="empty"><p class="muted">No channels you can see in {g.guild.name} yet.</p></div>
 {:else if !channel}

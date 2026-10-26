@@ -25,7 +25,7 @@
   }
 </script>
 
-<Modal title="Set a custom status" onclose={() => (ui.customStatus = false)}>
+<Modal title="Set a custom status" onclose={() => { ui.customStatus = false; }}>
   <div class="field">
     <label for="cs">What's up?</label>
     <div class="row">
@@ -46,7 +46,7 @@
   </div>
   {#if error}<p class="error-text">{error}</p>{/if}
   {#snippet footer()}
-    <button class="btn ghost" onclick={() => (ui.customStatus = false)}>Cancel</button>
+    <button class="btn ghost" onclick={() => { ui.customStatus = false; }}>Cancel</button>
     <button class="btn primary" disabled={!text.trim() && !emoji} onclick={save}>Save</button>
   {/snippet}
 </Modal>

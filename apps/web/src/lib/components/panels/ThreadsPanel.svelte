@@ -48,12 +48,12 @@
 </div>
 <div class="scroll body">
   {#each live as t (t.id)}
-    <button class="thread" onclick={() => (ui.thread = t.id)}>
+    <button class="thread" onclick={() => { ui.thread = t.id; }}>
       <Icon name="thread" size={18} />
       <span class="meta">
         <strong class="truncate">{t.name}</strong>
         <span class="faint small">
-          {t.threadMeta?.messageCount ?? 0} messages · {timeAgo(idTime(t.lastMessageId ?? t.id))}
+          {t.threadMeta?.messageCount ?? 0} {(t.threadMeta?.messageCount ?? 0) === 1 ? 'message' : 'messages'} · {timeAgo(idTime(t.lastMessageId ?? t.id))}
           {#if t.threadMeta?.locked} · 🔒{/if}
         </span>
       </span>

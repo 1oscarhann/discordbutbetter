@@ -49,18 +49,18 @@
 
 {#if ui.profile}
   {#if ui.profile.x !== undefined && ui.profile.y !== undefined && window.innerWidth > 760}
-    <Popover x={ui.profile.x} y={ui.profile.y} onclose={() => (ui.profile = null)}>
+    <Popover x={ui.profile.x} y={ui.profile.y} onclose={() => { ui.profile = null; }}>
       <ProfileCard userId={ui.profile.userId} guildId={ui.profile.guildId} />
     </Popover>
   {:else}
-    <Modal bare width={420} onclose={() => (ui.profile = null)}>
+    <Modal bare width={420} onclose={() => { ui.profile = null; }}>
       <ProfileCard userId={ui.profile.userId} guildId={ui.profile.guildId} />
     </Modal>
   {/if}
 {/if}
 
 {#if ui.lightbox}
-  <div class="lightbox" role="presentation" onclick={() => (ui.lightbox = null)} onkeydown={(e) => e.key === 'Escape' && (ui.lightbox = null)}>
+  <div class="lightbox" role="presentation" onclick={() => { ui.lightbox = null; }} onkeydown={(e) => e.key === 'Escape' && (ui.lightbox = null)}>
     <img src={ui.lightbox.src} alt={ui.lightbox.alt} />
     <div class="lbar">
       <a href={ui.lightbox.src} target="_blank" rel="noopener noreferrer" onclick={(e) => e.stopPropagation()}>Open original</a>
@@ -71,24 +71,24 @@
 
 {#if ui.confirmLink}
   {@const url = ui.confirmLink}
-  <Modal title="Leaving to another site" onclose={() => (ui.confirmLink = null)}>
+  <Modal title="Leaving to another site" onclose={() => { ui.confirmLink = null; }}>
     <p>This link goes to <strong>{host(url)}</strong>:</p>
     <p class="url">{url}</p>
     <p class="faint small">The link text was different from where it actually goes. Make sure you trust it.</p>
     {#snippet footer()}
-      <button class="btn ghost" onclick={() => (ui.confirmLink = null)}>Go back</button>
-      <a class="btn primary" href={url} target="_blank" rel="noopener noreferrer nofollow" onclick={() => (ui.confirmLink = null)}>Visit site</a>
+      <button class="btn ghost" onclick={() => { ui.confirmLink = null; }}>Go back</button>
+      <a class="btn primary" href={url} target="_blank" rel="noopener noreferrer nofollow" onclick={() => { ui.confirmLink = null; }}>Visit site</a>
     {/snippet}
   </Modal>
 {/if}
 
 {#if ui.reportConfirm}
   {@const c = ui.reportConfirm}
-  <Modal title={c.title} onclose={() => (ui.reportConfirm = null)} width={440}>
+  <Modal title={c.title} onclose={() => { ui.reportConfirm = null; }} width={440}>
     <p class="muted">{c.body}</p>
     {#if confirmError}<p class="error-text">{confirmError}</p>{/if}
     {#snippet footer()}
-      <button class="btn ghost" onclick={() => (ui.reportConfirm = null)}>Cancel</button>
+      <button class="btn ghost" onclick={() => { ui.reportConfirm = null; }}>Cancel</button>
       <button class="btn {c.danger ? 'danger' : 'primary'}" disabled={confirmBusy} onclick={doConfirm}>{c.confirm}</button>
     {/snippet}
   </Modal>

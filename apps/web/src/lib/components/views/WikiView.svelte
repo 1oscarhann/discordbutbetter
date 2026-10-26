@@ -82,7 +82,7 @@
 </script>
 
 <header class="hdr">
-  <button class="icon-btn burger" aria-label="Menu" onclick={() => (ui.mobileNav = true)}><Icon name="menu" /></button>
+  <button class="icon-btn burger" aria-label="Menu" onclick={() => { ui.mobileNav = true; }}><Icon name="menu" /></button>
   <Icon name="book" class="faint" />
   <strong>{channel.name}</strong>
   {#if channel.topic}<span class="faint truncate">— {channel.topic}</span>{/if}

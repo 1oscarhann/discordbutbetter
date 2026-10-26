@@ -39,7 +39,7 @@
 </script>
 
 <header class="hdr">
-  <button class="icon-btn burger" aria-label="Menu" onclick={() => (ui.mobileNav = true)}><Icon name="menu" /></button>
+  <button class="icon-btn burger" aria-label="Menu" onclick={() => { ui.mobileNav = true; }}><Icon name="menu" /></button>
   {#if channel.type === ChannelType.DM && other}
     <Avatar src={app.avatarOf(other.id)} name={app.displayName(other.id)} size={26} />
     <button
@@ -82,10 +82,10 @@
       <button class="icon-btn" class:active={ui.rightPanel === 'threads'} title="Threads" onclick={() => togglePanel('threads')}><Icon name="thread" /></button>
     {/if}
     {#if isDm || (channel.guildId && app.can(P.MANAGE_CHANNELS, channel.guildId, channel.id) && channel.type !== ChannelType.THREAD)}
-      <button class="icon-btn" title="Channel settings" onclick={() => (ui.channelSettings = channel.id)}><Icon name="settings" /></button>
+      <button class="icon-btn" title="Channel settings" onclick={() => { ui.channelSettings = channel.id; }}><Icon name="settings" /></button>
     {/if}
     {#if channel.guildId}
-      <button class="icon-btn" title="Notification settings" onclick={() => (ui.channelSettings = `notif:${channel.id}`)}>
+      <button class="icon-btn" title="Notification settings" onclick={() => { ui.channelSettings = `notif:${channel.id}`; }}>
         <Icon name={app.isChannelMuted(channel.id) ? 'bell-off' : 'bell'} />
       </button>
     {/if}

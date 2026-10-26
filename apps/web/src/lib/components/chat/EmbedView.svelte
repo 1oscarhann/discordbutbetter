@@ -9,7 +9,7 @@
 </script>
 
 {#if embed.type === 'image' && embed.image}
-  <button class="imgonly" onclick={() => (ui.lightbox = { src: embed.image!.url, alt: embed.url })}>
+  <button class="imgonly" onclick={() => { ui.lightbox = { src: embed.image!.url, alt: embed.url }; }}>
     <img src={embed.image.url} alt="" loading="lazy" />
   </button>
 {:else}
@@ -39,7 +39,7 @@
           {/if}
         </div>
       {:else if embed.image}
-        <button class="big" onclick={() => (ui.lightbox = { src: embed.image!.url, alt: embed.title ?? '' })}>
+        <button class="big" onclick={() => { ui.lightbox = { src: embed.image!.url, alt: embed.title ?? '' }; }}>
           <img src={embed.image.url} alt="" loading="lazy" />
         </button>
       {/if}

@@ -145,7 +145,7 @@
 </script>
 
 {#if c}
-  <Modal title={isDm ? channelTitle(c) : `#${c.name}`} onclose={() => (ui.channelSettings = null)} width={680}>
+  <Modal title={isDm ? channelTitle(c) : `#${c.name}`} onclose={() => { ui.channelSettings = null; }} width={680}>
     <div class="tabs">
       <button class="tab" class:active={tab === 'overview'} onclick={() => (tab = 'overview')}>Overview</button>
       {#if !isDm && canPerms && c.type !== ChannelType.THREAD}<button class="tab" class:active={tab === 'permissions'} onclick={() => (tab = 'permissions')}>Permissions</button>{/if}
@@ -187,11 +187,14 @@
           <span class="spacer"></span>
           <button
             class="btn danger"
-            onclick={() => ui.confirm(`Delete ${c.name}?`, 'This can’t be undone. All messages in it are deleted.', 'Delete channel', async () => {
-              await del(`/channels/${c.id}`);
-              ui.channelSettings = null;
-              if (c.guildId) goto(`/app/${c.guildId}`);
-            })}><Icon name="trash" size={15} /> Delete channel</button
+            onclick={() => {
+              const { id, guildId: gid, name: cname } = c;
+              ui.confirm(`Delete ${cname}?`, 'This can’t be undone. All messages in it are deleted.', 'Delete channel', async () => {
+                await del(`/channels/${id}`);
+                ui.channelSettings = null;
+                if (gid) goto(`/app/${gid}`);
+              });
+            }}><Icon name="trash" size={15} /> Delete channel</button
           >
         </div>
       {:else}

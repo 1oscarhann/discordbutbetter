@@ -16,7 +16,7 @@
 
   // archived threads aren't in the live list; fetch them
   $effect(() => {
-    if (!app.channel(threadId)) void get<Channel>(`/channels/${threadId}`).then((c) => (fetched = c)).catch(() => (ui.thread = null));
+    if (!app.channel(threadId)) void get<Channel>(`/channels/${threadId}`).then((c) => (fetched = c)).catch(() => { ui.thread = null; });
   });
 
   const canManage = $derived(thread?.guildId ? app.can(P.MANAGE_THREADS, thread.guildId, threadId) : false);
@@ -48,7 +48,7 @@
         </button>
       {/if}
       <button class="icon-btn" title="Open full view" onclick={() => goto(`/app/${thread.guildId}/${thread.id}`)}><Icon name="maximize" size={17} /></button>
-      <button class="icon-btn" title="Close" onclick={() => (ui.thread = null)}><Icon name="x" size={18} /></button>
+      <button class="icon-btn" title="Close" onclick={() => { ui.thread = null; }}><Icon name="x" size={18} /></button>
     </header>
     <MessageList channel={thread} embedded onEditLast={() => composer?.editLast()} onReply={(id) => composer?.replyTo(id)} />
     <Composer bind:this={composer} channel={thread} />

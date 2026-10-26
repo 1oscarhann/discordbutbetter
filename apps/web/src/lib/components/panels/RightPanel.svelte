@@ -15,7 +15,7 @@
   {#if panel !== 'members'}
     <header>
       <strong>{TITLES[panel] ?? ''}</strong>
-      <button class="icon-btn" aria-label="Close" onclick={() => (ui.rightPanel = channel.guildId ? 'members' : null)}><Icon name="x" size={18} /></button>
+      <button class="icon-btn" aria-label="Close" onclick={() => { ui.rightPanel = channel.guildId ? 'members' : null; }}><Icon name="x" size={18} /></button>
     </header>
   {/if}
   {#if panel === 'members' && channel.guildId}

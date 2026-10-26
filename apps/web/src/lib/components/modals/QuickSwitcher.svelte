@@ -99,7 +99,7 @@
   }
 </script>
 
-<Modal title="Jump to" onclose={() => (ui.quickSwitcher = false)} width={520}>
+<Modal title="Jump to" onclose={() => { ui.quickSwitcher = false; }} width={520}>
   <input class="input big" placeholder="Where to? Channels, DMs, servers…" bind:value={q} onkeydown={key} aria-label="Search" />
   <div class="list" role="listbox">
     {#each results as r, i (r.key)}

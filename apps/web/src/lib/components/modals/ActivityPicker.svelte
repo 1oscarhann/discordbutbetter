@@ -92,7 +92,7 @@
 
 </script>
 
-<Modal title={kind === 'playing' ? 'What are you playing?' : 'What are you listening to?'} onclose={() => (ui.activityPicker = null)} width={520}>
+<Modal title={kind === 'playing' ? 'What are you playing?' : 'What are you listening to?'} onclose={() => { ui.activityPicker = null; }} width={520}>
   {#if current}
     <div class="current card">
       {#if current.cover}<img src={proxiedImage(current.cover, 128)} alt="" />{/if}
@@ -159,7 +159,7 @@
   {/if}
   {#if error}<p class="error-text">{error}</p>{/if}
   {#snippet footer()}
-    <button class="btn ghost" onclick={() => (ui.activityPicker = null)}>Close</button>
+    <button class="btn ghost" onclick={() => { ui.activityPicker = null; }}>Close</button>
     {#if custom}<button class="btn primary" form="cust" disabled={!name.trim() || (kind === 'listening' && !artist.trim())}>Save</button>{/if}
   {/snippet}
 </Modal>

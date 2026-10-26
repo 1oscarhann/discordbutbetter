@@ -62,7 +62,7 @@
 
   <div class="sect">
     <span>Direct messages</span>
-    <button class="icon-btn mini" title="New message" onclick={() => (ui.newDm = true)}><Icon name="plus" size={16} /></button>
+    <button class="icon-btn mini" title="New message" onclick={() => { ui.newDm = true; }}><Icon name="plus" size={16} /></button>
   </div>
 
   {#each shown as c (c.id)}

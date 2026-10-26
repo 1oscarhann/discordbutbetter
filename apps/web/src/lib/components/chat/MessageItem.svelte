@@ -187,10 +187,10 @@
       <span><button class="link" onclick={(e) => openProfile(e, authorId)}>{name}</button> joined the server. Say hi! 👋</span>
     {:else if m.type === MessageType.THREAD_CREATED}
       <span class="sysicon"><Icon name="thread" size={16} /></span>
-      <span>{name} started a thread: <button class="link" onclick={() => (ui.thread = String(m.metadata?.threadId))}>{String(m.metadata?.name ?? 'thread')}</button></span>
+      <span>{name} started a thread: <button class="link" onclick={() => { ui.thread = String(m.metadata?.threadId); }}>{String(m.metadata?.name ?? 'thread')}</button></span>
     {:else if m.type === MessageType.PIN}
       <span class="sysicon"><Icon name="pin" size={16} /></span>
-      <span>{name} pinned <button class="link" onclick={() => onJump?.(String(m.metadata?.messageId))}>a message</button>. <button class="link" onclick={() => (ui.rightPanel = 'pins')}>See all pins</button></span>
+      <span>{name} pinned <button class="link" onclick={() => onJump?.(String(m.metadata?.messageId))}>a message</button>. <button class="link" onclick={() => { ui.rightPanel = 'pins'; }}>See all pins</button></span>
     {:else if m.type === MessageType.DISAPPEARING_CHANGED}
       <span class="sysicon"><Icon name="hourglass" size={16} /></span>
       <span>
@@ -307,7 +307,7 @@
         <div class="content">
           <Markdown content={m.content} {guildId} />
           {#if m.editedAt}
-            <button class="edited faint" title="Edited {fullDate(m.editedAt)} — click for history" onclick={() => (ui.editHistory = { channelId: channel.id, messageId: m.id })}>(edited)</button>
+            <button class="edited faint" title="Edited {fullDate(m.editedAt)} — click for history" onclick={() => { ui.editHistory = { channelId: channel.id, messageId: m.id }; }}>(edited)</button>
           {/if}
         </div>
       {/if}
@@ -322,10 +322,10 @@
       {#if m.reactions.length}<Reactions message={m} {channel} onToggle={react} />{/if}
       {#if m.threadId}
         {@const t = app.channel(m.threadId)}
-        <button class="threadlink" onclick={() => (ui.thread = m.threadId)}>
+        <button class="threadlink" onclick={() => { ui.thread = m.threadId; }}>
           <Icon name="thread" size={14} />
           <strong>{t?.name ?? 'Thread'}</strong>
-          <span class="faint">{t?.threadMeta?.messageCount ?? 0} messages ›</span>
+          <span class="faint">{t?.threadMeta?.messageCount ?? 0} {(t?.threadMeta?.messageCount ?? 0) === 1 ? 'message' : 'messages'} ›</span>
         </button>
       {/if}
       {#if m.pending === 'failed'}

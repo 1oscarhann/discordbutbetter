@@ -73,7 +73,7 @@
   <button class="icon-btn" class:danger={voice.selfDeaf} title={voice.selfDeaf ? 'Undeafen' : 'Deafen'} onclick={() => voice.toggleDeaf()}>
     <Icon name={voice.selfDeaf ? 'headphones-off' : 'headphones'} size={18} />
   </button>
-  <button class="icon-btn" title="Settings" onclick={() => (ui.settings = 'account')}><Icon name="settings" size={18} /></button>
+  <button class="icon-btn" title="Settings" onclick={() => { ui.settings = 'account'; }}><Icon name="settings" size={18} /></button>
 </div>
 
 {#if open}
@@ -89,19 +89,19 @@
         </button>
       {/each}
       <div class="menu-sep"></div>
-      <button class="menu-item" onclick={() => ((ui.customStatus = true), (open = false))}><Icon name="smile" size={16} /> {app.presence(me.id).customStatus ? 'Edit' : 'Set'} custom status</button>
+      <button class="menu-item" onclick={() => { ui.customStatus = true; open = false; }}><Icon name="smile" size={16} /> {app.presence(me.id).customStatus ? 'Edit' : 'Set'} custom status</button>
       {#if app.presence(me.id).customStatus}
         <button class="menu-item" onclick={() => ((open = false), clearStatus())}><Icon name="x" size={16} /> Clear custom status</button>
       {/if}
-      <button class="menu-item" onclick={() => ((ui.activityPicker = 'playing'), (open = false))}>
+      <button class="menu-item" onclick={() => { ui.activityPicker = 'playing'; open = false; }}>
         <Icon name="gamepad" size={16} /> {me.playing ? `Playing ${me.playing.name}` : 'Set what you’re playing'}
       </button>
-      <button class="menu-item" onclick={() => ((ui.activityPicker = 'listening'), (open = false))}>
+      <button class="menu-item" onclick={() => { ui.activityPicker = 'listening'; open = false; }}>
         <Icon name="music" size={16} /> {me.listening ? `Listening to ${me.listening.title}` : 'Set what you’re listening to'}
       </button>
       <div class="menu-sep"></div>
-      <button class="menu-item" onclick={() => ((ui.profile = { userId: me.id, guildId: null }), (open = false))}><Icon name="eye" size={16} /> View my profile</button>
-      <button class="menu-item" onclick={() => ((ui.settings = 'profile'), (open = false))}><Icon name="edit" size={16} /> Edit profile</button>
+      <button class="menu-item" onclick={() => { ui.profile = { userId: me.id, guildId: null }; open = false; }}><Icon name="eye" size={16} /> View my profile</button>
+      <button class="menu-item" onclick={() => { ui.settings = 'profile'; open = false; }}><Icon name="edit" size={16} /> Edit profile</button>
       <button class="menu-item" onclick={() => (copy(me.username, 'Username copied'), (open = false))}><Icon name="copy" size={16} /> Copy username</button>
     </div>
   </Popover>

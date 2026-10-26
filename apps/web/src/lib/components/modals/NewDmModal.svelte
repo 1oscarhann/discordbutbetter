@@ -36,7 +36,7 @@
   }
 </script>
 
-<Modal title="New message" onclose={() => (ui.newDm = false)}>
+<Modal title="New message" onclose={() => { ui.newDm = false; }}>
   <p class="faint small">Pick one friend for a DM, or up to {Limits.GROUP_DM_MAX - 1} for a group. To DM someone who isn't a friend, open their profile from a shared server.</p>
   <input class="input" placeholder="Search friends" bind:value={q} />
   <div class="list scroll">
@@ -52,7 +52,7 @@
   </div>
   {#if error}<p class="error-text">{error}</p>{/if}
   {#snippet footer()}
-    <button class="btn ghost" onclick={() => (ui.newDm = false)}>Cancel</button>
+    <button class="btn ghost" onclick={() => { ui.newDm = false; }}>Cancel</button>
     <button class="btn primary" disabled={busy || !picked.length} onclick={start}>{picked.length > 1 ? 'Create group' : 'Message'}</button>
   {/snippet}
 </Modal>

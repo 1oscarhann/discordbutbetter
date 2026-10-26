@@ -118,10 +118,10 @@
       {#if u.mentions}<span class="badge mb">{u.mentions > 99 ? '99+' : u.mentions}</span>{/if}
     </div>
   {/each}
-  <button class="item add" title="Create a server" onclick={() => (ui.createGuild = true)}>
+  <button class="item add" title="Create a server" onclick={() => { ui.createGuild = true; }}>
     <span class="icon"><Icon name="plus" size={22} /></span>
   </button>
-  <button class="item add" title="Join a server" onclick={() => (ui.joinGuild = true)}>
+  <button class="item add" title="Join a server" onclick={() => { ui.joinGuild = true; }}>
     <span class="icon"><Icon name="globe" size={20} /></span>
   </button>
 </div>

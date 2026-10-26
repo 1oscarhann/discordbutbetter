@@ -167,7 +167,7 @@
     </div>
     <div class="actions-top">
       {#if isMe}
-        <button class="pbtn" onclick={() => ((ui.profile = null), (ui.settings = guildId ? `server-profile:${guildId}` : 'profile'))}><Icon name="edit" size={14} /> Edit profile</button>
+        <button class="pbtn" onclick={() => { ui.profile = null; ui.settings = guildId ? `server-profile:${guildId}` : 'profile'; }}><Icon name="edit" size={14} /> Edit profile</button>
       {:else if rel === RelationshipType.FRIEND}
         <button class="pbtn" onclick={() => message()}><Icon name="message" size={14} /> Message</button>
       {:else if rel === RelationshipType.INCOMING}
@@ -289,14 +289,14 @@
           {#each profile.mutualGuilds as gid (gid)}
             {@const mg = app.guilds.get(gid)}
             {#if mg}
-              <button class="mutual" onclick={() => ((ui.profile = null), goto(`/app/${gid}`))}>
+              <button class="mutual" onclick={() => { ui.profile = null; goto(`/app/${gid}`); }}>
                 <Avatar src={mg.guild.icon} name={mg.guild.name} size={26} square />{mg.guild.name}
               </button>
             {/if}
           {/each}
           <h4 style="margin-top:12px">Mutual friends ({profile.mutualFriends.length})</h4>
           {#each profile.mutualFriends as f (f.id)}
-            <button class="mutual" onclick={() => (ui.profile = { userId: f.id, guildId: null })}>
+            <button class="mutual" onclick={() => { ui.profile = { userId: f.id, guildId: null }; }}>
               <Avatar src={f.avatar} name={f.displayName || f.username} size={26} />{f.displayName || f.username}
             </button>
           {/each}

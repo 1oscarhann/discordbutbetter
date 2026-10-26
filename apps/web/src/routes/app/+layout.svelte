@@ -54,7 +54,7 @@
         <UserPanel />
       </div>
     </nav>
-    <button class="scrim" aria-label="Close menu" onclick={() => (ui.mobileNav = false)}></button>
+    <button class="scrim" aria-label="Close menu" onclick={() => { ui.mobileNav = false; }}></button>
     <section class="main">
       {#if app.connection !== 'open'}
         <div class="conn">Connection lost — reconnecting…</div>

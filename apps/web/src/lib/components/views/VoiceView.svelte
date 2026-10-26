@@ -53,7 +53,7 @@
 
 <div class="voice">
   <header class="hdr">
-    <button class="icon-btn burger" aria-label="Menu" onclick={() => (ui.mobileNav = true)}><Icon name="menu" /></button>
+    <button class="icon-btn burger" aria-label="Menu" onclick={() => { ui.mobileNav = true; }}><Icon name="menu" /></button>
     <Icon name="speaker" class="faint" />
     <strong class="truncate">{channel.name}</strong>
     <span class="faint">{here.length}{channel.userLimit ? `/${channel.userLimit}` : ''} connected</span>

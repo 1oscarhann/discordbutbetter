@@ -59,7 +59,7 @@
   });
 </script>
 
-<SettingsShell {sections} bind:tab onclose={() => (ui.settings = null)}>
+<SettingsShell {sections} bind:tab onclose={() => { ui.settings = null; }}>
   {#key tab}
     {#if tab === 'account'}
       <AccountTab />

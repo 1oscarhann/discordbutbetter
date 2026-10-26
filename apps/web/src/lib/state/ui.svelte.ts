@@ -17,7 +17,9 @@ class UiState {
   activityPicker = $state<'playing' | 'listening' | null>(null);
   editHistory = $state<{ channelId: string; messageId: string } | null>(null);
   scheduleFor = $state<{ channelId: string; content: string; replyTo?: { messageId: string; ping: boolean }; silent: boolean } | null>(null);
-  rightPanel = $state<RightPanel>('members');
+  /** Below this width side panels cover the chat, so they start closed. */
+  static readonly OVERLAY_WIDTH = 1100;
+  rightPanel = $state<RightPanel>(typeof window !== 'undefined' && window.innerWidth <= UiState.OVERLAY_WIDTH ? null : 'members');
   thread = $state<string | null>(null);
   searchQuery = $state('');
   mobileNav = $state(false);

@@ -63,7 +63,7 @@
 </script>
 
 <header class="hdr">
-  <button class="icon-btn burger" aria-label="Menu" onclick={() => (ui.mobileNav = true)}><Icon name="menu" /></button>
+  <button class="icon-btn burger" aria-label="Menu" onclick={() => { ui.mobileNav = true; }}><Icon name="menu" /></button>
   <Icon name="bookmark" /> <strong>Saved messages</strong>
 </header>
 <div class="body">

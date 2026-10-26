@@ -517,7 +517,7 @@
             <div class="fmeta faint">{f.error ?? (f.uploaded ? formatBytes(f.file.size) : `${Math.round(f.progress * 100)}%`)}</div>
             {#if !f.uploaded && !f.error}<div class="prog" style="width:{f.progress * 100}%"></div>{/if}
             <div class="factions">
-              <button class="icon-btn small-btn" title={f.spoiler ? 'Unmark spoiler' : 'Mark as spoiler'} onclick={() => (f.spoiler = !f.spoiler)}><Icon name="eye" size={14} /></button>
+              <button class="icon-btn small-btn" title={f.spoiler ? 'Unmark spoiler' : 'Mark as spoiler'} onclick={() => { f.spoiler = !f.spoiler; }}><Icon name="eye" size={14} /></button>
               <button class="icon-btn small-btn danger" title="Remove" onclick={() => removeFile(f.key)}><Icon name="trash" size={14} /></button>
             </div>
           </div>

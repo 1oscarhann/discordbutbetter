@@ -39,7 +39,7 @@ Read this before you deploy. None of these are hidden behind fake buttons — th
 - **Email** is plain text and has only been tested against a stub mailer, not a real SMTP provider.
 - **Desktop app:** builds are unsigned (expect SmartScreen/Gatekeeper warnings) and there's no auto-update. It has been compiled and run on Linux; Windows and macOS builds haven't been tested by me. On Linux, voice/screen share depend on your distro's WebKitGTK having WebRTC (screen share needs WebKitGTK ≥ 2.42) — if it misbehaves, use the browser.
 - **Scaling:** built so several app instances can share Postgres/Valkey, but only a single instance has been tested.
-- **Not every UI flow has an automated browser test.** API-level tests cover permissions, auth, messaging, gateway, admin and extras; the browser smoke test covers the main flows (sign-up, servers, invites, messaging, edits, mentions, profiles, settings, roles, audit log, DMs, games, reactions, uploads, search, compact mode, admin, phone layout, two-person voice). Wiki, threads, scheduled messages, disappearing messages, guestbook, watch-together and profile songs were built and type-checked but not clicked through by a test.
+- **Not every UI flow has an automated browser test.** API tests cover permissions, auth, messaging, gateway, admin and extras. The browser suites in `e2e/` click through sign-up, servers, invites, messaging, edits, mentions, reactions, uploads (incl. EXIF stripping), search, profiles, settings, roles, audit log, DMs, games, compact mode, the admin panel, phone layout, saved messages, threads, send later, wiki, friends, guestbook, disappearing messages, profile songs and two-person voice. **Not** clicked through by a test: watch-together (needs YouTube), camera and screen share (voice was tested with a fake mic only), custom emoji/sticker uploads, the AutoMod editor, levels, read receipts, "While you were away", theme share codes in the UI (the codec itself is unit-tested) and server profiles.
 - **No license file yet** — pick one before you publish this.
 
 ---
@@ -188,6 +188,14 @@ The server's defaults point at `postgres://haunt:haunt@localhost:5432/haunt` and
 pnpm test        # shared + server tests (server tests use the haunt_test database and Valkey db 15)
 pnpm typecheck
 pnpm build
+```
+
+Browser tests (two headless users clicking through the app) run against a live instance — a fresh database is best, since they register `alice`, `bob`, `kim` and `lee`:
+
+```sh
+pnpm exec playwright install chromium   # once
+pnpm e2e                                # e2e/smoke.cjs + e2e/flows.cjs against `pnpm dev` (localhost:5173); BASE=… for another instance
+BASE=https://localhost node e2e/voice.cjs   # needs LiveKit, e.g. the local compose stack. Screenshots go to e2e/.shots/
 ```
 
 ### Layout
