@@ -648,7 +648,8 @@ class AppState {
         if (!c.guildId) return;
         const g = this.guilds.get(c.guildId);
         if (!g) return;
-        if (c.threadMeta?.archived && !this.focusedChannel?.includes(c.id)) g.threads.delete(c.id);
+        // archived threads leave the sidebar; the thread pane refetches them if open
+        if (c.threadMeta?.archived && this.focusedChannel !== c.id) g.threads.delete(c.id);
         else g.threads.set(c.id, c);
         this.channelGuild.set(c.id, c.guildId);
         return;
